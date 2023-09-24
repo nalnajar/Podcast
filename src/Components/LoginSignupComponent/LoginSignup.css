@@ -1,0 +1,146 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 600px;
+  margin-top: 200px;
+  background: #fff;
+  padding-bottom: 30px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.text {
+  color: black;
+  font-size: 50px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-underline-offset: 8px;
+}
+
+.inputs {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 480px;
+  height: 80px;
+  background: whitesmoke;
+  border-radius: 6px;
+}
+
+.input img {
+  margin: 0px 30px;
+}
+
+.input input {
+  height: 55px;
+  width: 400px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: grey;
+  font-size: 20px;
+}
+
+.forgot-password {
+  padding-left: 62px;
+  margin-top: 27px;
+  color: gray;
+  font-size: 19px;
+}
+.forgot-password span {
+  color: blue;
+  cursor: pointer;
+}
+
+.submit-container {
+  display: flex;
+  gap: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top: 20px;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 59px;
+  color: white;
+  background: blue;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.gray {
+  background: gray;
+  color: #fff;
+}
+
+.altLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+  width: 100%;
+}
+.alt-login {
+  width: 80%;
+  height: 3em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.alt-login div {
+  width: 45%;
+  height: 90%;
+  border-radius: 3em;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.google {
+  background-color: #df4930;
+}
+.facebook {
+  background-color: #507cc0;
+}
+
+.alt-login img {
+  padding-left: 90px;
+  background-size: contain;
+  height: 90%;
+  padding-top: 2px;
+}
+
+.submit:hover {
+  transform: scale(1.1);
+}
+
+.google:hover {
+  transform: scale(1.1);
+}
+.facebook:hover {
+  transform: scale(1.1);
+}
+div:empty {
+  display: none;
+}
