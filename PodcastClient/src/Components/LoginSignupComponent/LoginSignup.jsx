@@ -33,7 +33,7 @@ const LoginSignup = () => {
     e.preventDefault();
     setFormErrors(validateLogin(formValuesLogin));
     setIsSubmit(true);
-    console.log(formValuesLogin); //added these for backend to view the data that is parsed
+    console.log(formValuesLogin);
   };
 
   useEffect(() => {
