@@ -1,0 +1,20 @@
+{
+  "name": "server_side",
+  "version": "0.0.1",
+  "description": "Application Description",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "angular": "latest",
+    "angular-ui-router": "latest",
+    "body-parser": "latest",
+    "dat-gui": "latest",
+    "express": "latest",
+    "path": "latest",
+    "q": "latest",
+    "sequelize": "latest",
+    "tedious": "latest"
+  }
+}
