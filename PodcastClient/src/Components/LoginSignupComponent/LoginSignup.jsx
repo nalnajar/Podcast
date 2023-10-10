@@ -30,10 +30,10 @@ const LoginSignup = () => {
     console.log(formValues); //added these for backend to view the data that is parsed
   };
   const handleSubmitLogin = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //test comment
     setFormErrors(validateLogin(formValuesLogin));
     setIsSubmit(true);
-    console.log(formValuesLogin);
+    console.log(formValuesLogin); //added these for backend to view the data that is parsed
   };
 
   useEffect(() => {
