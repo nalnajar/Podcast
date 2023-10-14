@@ -13,8 +13,13 @@ class LinkSB extends Component {
           display: "block",
           width: "fit-content",
           float: this.props.float ?? "left",
+
           margin: 1,
-          padding: 5,
+          marginRight: this.props.marginRight ?? 1,
+          paddingTop: 6,
+          paddingBottom: 6,
+          paddingLeft: 10,
+          paddingRight: 10,
           borderRadius: 10,
           textDecoration: "none",
           color: "inherit",
@@ -32,9 +37,10 @@ class HeaderBar extends Component {
   render() {
     return (
       <div id="Header">
-        <LinkSB text="Home" to="/Home" />
+        <LinkSB text="Home" to="/Home" marginRight={"10px"} />
+        <LinkSB text="About" to="/About" />
         <LinkSB text="Sign Up" to="/Signup" float="right" />
-        <LinkSB text="Log in" to="/Log-in" float="right" />
+        <LinkSB text="Log in" to="/Log-in" float="right" marginRight={"10px"} />
       </div>
     );
   }
