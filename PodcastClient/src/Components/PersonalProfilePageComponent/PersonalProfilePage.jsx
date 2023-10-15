@@ -13,7 +13,7 @@ const PersonalProfilePage = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflow: "auto" }}>
       <div className={`container ${selectedMode}`}>
         <div className="cover-photo-div">
           <img
@@ -31,9 +31,9 @@ const PersonalProfilePage = () => {
           <div className={`profile-name ${selectedMode}`}>
             <h3>User Name (Nick Name)</h3>
           </div>
-          <div className={`line ${selectedMode}`}>
+          {/* <div className={`line ${selectedMode}`}>
             <p></p>
-          </div>
+          </div> */}
         </div>
         <div className="content">{/* Content inside the container */}</div>
 
@@ -59,7 +59,20 @@ const PersonalProfilePage = () => {
         </div>
 
         {/* Content */}
-        <div className="content"></div>
+        <div className="content">
+          <div  className={`content-intro ${selectedMode}`}>
+            <p>This is intro section</p>
+          </div>
+          <div  className="content-post">
+          <div  className={`content-post-upload ${selectedMode}`}>
+            <p>This is post upload section</p>
+          </div>
+          <div  className={`content-post-review ${selectedMode}`}>
+          <p>This is post section</p>
+          </div>
+
+          </div>
+        </div>
       </div>
     </div>
   );
