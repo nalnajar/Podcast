@@ -16,17 +16,20 @@ function App() {
     // <div>
     //   <LoginSignup />
     // </div>
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginSignup />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/About" element={<AboutPage />} />
+        <Route path="/Signup" element={<LoginSignup />} />
+        <Route path="/Log-in" element={<LoginSignup />} />
         <Route path="/profilepage" element={<PersonalProfilePage />} />
-        <Route path="/personalposts"  element={<PersonalPostsPage />}/>
-        <Route path="/personalphotos"  element={<PersonalPhotosPage />}/>
-        <Route path="/personalabout"  element={<PersonalAboutPage />}/>
-        <Route path="/personalvideos"  element={<PersonalVideosPage />}/>
-
+        <Route path="/personalposts" element={<PersonalPostsPage />} />
+        <Route path="/personalphotos" element={<PersonalPhotosPage />} />
+        <Route path="/personalabout" element={<PersonalAboutPage />} />
+        <Route path="/personalvideos" element={<PersonalVideosPage />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
