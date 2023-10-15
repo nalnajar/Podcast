@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -7,6 +8,8 @@ import PersonalPostsPage from "./Components/PersonalProfilePageComponent/Persona
 import PersonalAboutPage from "./Components/PersonalProfilePageComponent/PersonalAboutsPage";
 import PersonalPhotosPage from "./Components/PersonalProfilePageComponent/PersonalPhotosPage";
 import PersonalVideosPage from "./Components/PersonalProfilePageComponent/PersonalVideosPage";
+import Home from "./Components/Home/Home";
+import AboutPage from "./Components/About/AboutPage";
 
 function App() {
   return (
