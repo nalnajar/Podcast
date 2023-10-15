@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
 const bcrpty = require("bcrypt");
+const { emit } = require("process");
 
 app.use(bodyParser.json());
 
@@ -51,33 +52,43 @@ app.get("/getUsers/:id", function (req, res) {
 
 app.post("/addUser", async(req, res) => {
   try{
-    const hashedPassword = await bcrpty.hash(req.body.password, 10);
-    var newUser = {
-      name: "",
-      password: "",
-      email: "",
-      id: 0,
-    };
-  }catch{
+  //create a password that is hashed 10 times
+  const hashedPassword = await bcrpty.hash(req.body.password, 10);
 
+  var newUser = {
+    id: 0, //missing logic to set id
+    name: req.body.name,
+    email: req.body.email,
+    password: hashedPassword, //Hashes a given users password
   }
 
+  }catch{
+    //Handle Errors
+  }
+
+    //OLD 
+  var oldUser = {
+    name: "",
+    password: "",
+    email: "",
+    id: 0,
+  };
 
   console.log(req.body);
 
   var data = JSON.parse(readFile(__dirname + "/testdata/users.json"));
 
-  newUser.id = data.users.length + 1;
-  newUser.name = req.body.name;
-  newUser.password = req.body.password;
-  newUser.email = req.body.email;
+  oldUser.id = data.users.length + 1;
+  oldUser.name = req.body.name;
+  oldUser.password = req.body.password;
+  oldUser.email = req.body.email;
 
 
 
   //this is NOT SAFE and WILL be replaced with SQL auto 
   //generated id after it gets added
   try {
-    data.users[data.users.length] = newUser;
+    data.users[data.users.length] = oldUser;
   } catch (err) {
     console.log(err);
   }
