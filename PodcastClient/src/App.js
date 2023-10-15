@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginSignup from "./Components/LoginSignupComponent/LoginSignup";
 import PersonalProfilePage from "./Components/PersonalProfilePageComponent/PersonalProfilePage";
 import PersonalPostsPage from "./Components/PersonalProfilePageComponent/PersonalPostsPage";
