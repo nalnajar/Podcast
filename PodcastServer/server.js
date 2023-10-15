@@ -6,6 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
+const bcrpty = require("bcrypt");
 
 app.use(bodyParser.json());
 
@@ -48,13 +49,19 @@ app.get("/getUsers/:id", function (req, res) {
   res.end(user);
 });
 
-app.post("/addUser", (req, res) => {
-  var newUser = {
-    name: "",
-    password: "",
-    email: "",
-    id: 0,
-  };
+app.post("/addUser", async(req, res) => {
+  try{
+    const hashedPassword = await bcrpty.hash(req.body.password, 10);
+    var newUser = {
+      name: "",
+      password: "",
+      email: "",
+      id: 0,
+    };
+  }catch{
+
+  }
+
 
   console.log(req.body);
 
