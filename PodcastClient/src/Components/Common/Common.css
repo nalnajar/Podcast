@@ -1,0 +1,17 @@
+#Header {
+  border-bottom: 5px solid black;
+  height: 30px;
+  position: static;
+  background-color: #333;
+  padding: 8px 40px;
+}
+
+.CommonButton {
+  font-size: 16px;
+  background-color: #4CAF50; /* A fresh green color */
+  transition: background-color 0.3s ease;
+}
+
+.CommonButton:hover {
+  background-color: #348138;
+}
