@@ -1,10 +1,12 @@
-import "./LoginSignup.css";
 import React, { useState, useEffect } from "react";
 import user from "../Assets/person.png";
 import email from "../Assets/email.png";
 import password from "../Assets/password.png";
 import google from "../Assets/google.png";
 import facebook from "../Assets/facebook.png";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import "./LoginSignup.css";
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Sign Up");
@@ -16,11 +18,21 @@ const LoginSignup = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showSuccessMessageLogin, setShowSuccessMessageLogin] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Add modal open state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
     setFormValuesLogin({ ...formValues, [name]: value });
+  };
+
+  const handleLoginButtonClick = () => {
+    setAction("Login");
+    setIsModalOpen(true);
+  };
+  const handleSignUpButtonClick = () => {
+    setAction("Sign Up");
+    setIsModalOpen(true);
   };
 
   const handleSubmit = (e) => {
@@ -77,7 +89,6 @@ const LoginSignup = () => {
 
   const validateLogin = (values) => {
     const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.username) {
       errors.username = "Username is required!";
     }
@@ -88,122 +99,117 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="container">
-      {showSuccessMessage && (
-        <div className="ui message success">Signed up successfully</div>
-      )}
-      {showSuccessMessageLogin && (
-        <div className="ui message success">Logged in successfully</div>
-      )}
+    <div>
+      <button onClick={handleSignUpButtonClick} className="CommonButton">
+        Sign Up
+      </button>
+      <button onClick={handleLoginButtonClick} className="CommonButton">
+        Log In
+      </button>
 
-      <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div>
-      </div>
-      <div className="inputs">
-        <div className="alt-login">
-          <div className="facebook">
-            <img src={facebook} alt="" />
-          </div>
-          <div className="google">
-            <img src={google} alt="" />
-          </div>
-        </div>
-        <p className="altLogin">Or {action} Using</p>
-        <form onSubmit={handleSubmit}>
-          <div className="input">
-            <img src={user} alt="" />
-            <input
-              type="text"
-              name="username"
-              placeholder="User Name"
-              value={formValues.username}
-              onChange={handleChange}
-            />
-          </div>
-          <p className="errorText">{formErrors.username}</p>
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className="container">
+          {showSuccessMessage && (
+            <div className="ui message success">Signed up successfully</div>
+          )}
+          {showSuccessMessageLogin && (
+            <div className="ui message success">Logged in successfully</div>
+          )}
 
-          {action === "Login" ? (
-            <div></div>
-          ) : (
-            <>
+          <div className="header">
+            <div className="text">{action}</div>
+            <div className="underline"></div>
+          </div>
+          <div className="inputs">
+            <div className="alt-login">
+              <div className="facebook">
+                <img src={facebook} alt="" />
+              </div>
+              <div className="google">
+                <img src={google} alt="" />
+              </div>
+            </div>
+            <p className="altLogin">Or {action} Using</p>
+            <form onSubmit={handleSubmit}>
               <div className="input">
-                <img src={email} alt="" />
+                <img src={user} alt="" />
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formValues.email}
+                  type="text"
+                  name="username"
+                  placeholder="User Name"
+                  value={formValues.username}
                   onChange={handleChange}
                 />
               </div>
-              <p className="errorText">{formErrors.email}</p>
-            </>
+              <p className="errorText">{formErrors.username}</p>
+
+              {action === "Login" ? (
+                <div></div>
+              ) : (
+                <>
+                  <div className="input">
+                    <img src={email} alt="" />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={formValues.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <p className="errorText">{formErrors.email}</p>
+                </>
+              )}
+
+              <div className="input">
+                <img src={password} alt="" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <p className="errorText">{formErrors.password}</p>
+            </form>
+          </div>
+          {action === "Sign Up" ? (
+            <div className="submitbutton-container">
+              <button className="submit submitButton" onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
+          ) : (
+            <div className="submitbutton-container">
+              <button
+                className="submit submitButton"
+                onClick={handleSubmitLogin}
+              >
+                Submit
+              </button>
+            </div>
           )}
 
-          <div className="input">
-            <img src={password} alt="" />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-            />
-          </div>
-          <p className="errorText">{formErrors.password}</p>
-        </form>
-      </div>
-      {action === "Sign Up" ? (
-        <div className="submitbutton-container">
-          <button className="submit submitButton" onClick={handleSubmit}>
-            Submit
-          </button>
+          {action === "Sign Up" ? (
+            <div className="forgot-password">
+              Already a Member? Click{" "}
+              <span
+                onClick={() => {
+                  setAction("Login");
+                }}
+              >
+                Login
+              </span>{" "}
+              Below!
+            </div>
+          ) : (
+            <div className="forgot-password">
+              Lost Password? <span>Click Here!</span>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="submitbutton-container">
-          <button className="submit submitButton" onClick={handleSubmitLogin}>
-            Submit
-          </button>
-        </div>
-      )}
-
-      {action === "Sign Up" ? (
-        <div className="forgot-password">
-          Already a Member? Click{" "}
-          <span
-            onClick={() => {
-              setAction("Login");
-            }}
-          >
-            Login
-          </span>{" "}
-          Below!
-        </div>
-      ) : (
-        <div className="forgot-password">
-          Lost Password? <span>Click Here!</span>
-        </div>
-      )}
-
-      <div className="submit-container">
-        <div
-          className={action === "Login" ? "submit gray" : "submit"}
-          onClick={() => {
-            setAction("Sign Up");
-          }}
-        >
-          Signup
-        </div>
-        <div
-          className={action === "Sign Up" ? "submit gray" : "submit"}
-          onClick={() => {
-            setAction("Login");
-          }}
-        >
-          Login
-        </div>
-      </div>
+      </Modal>
     </div>
   );
 };
