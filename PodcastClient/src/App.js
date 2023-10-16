@@ -1,11 +1,17 @@
-import "./App.css";
-import LoginSignup from "./Components/LoginSignupComponent/LoginSignup";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginSignup from './Components/LoginSignupComponent/LoginSignup';
+import DeveloperPage from './Components/DevelopersPageComponent/developerspage';
 
 function App() {
   return (
-    <div>
-      <LoginSignup />
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/DeveloperPage" element={<DeveloperPage />} />
+          <Route path="/" element={<LoginSignup />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
