@@ -1,0 +1,18 @@
+.privacy-content {
+  height: 600px;
+  overflow-y: auto;
+}
+
+.privacy-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  outline: none;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.privacy-button:hover {
+  text-decoration: underline;
+  color: #4caf50;
+}
