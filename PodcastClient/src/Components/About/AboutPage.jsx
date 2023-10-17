@@ -4,21 +4,6 @@ import Waves from "../Assets/Waves.png";
 import { HeaderBar } from "../Common/Common";
 
 const AboutPage = () => {
-  const coders = [
-    "Ralph Constantin",
-    "Ryan Squire",
-    "Gavin Guerrette",
-    "Agnita Paul",
-    "Noor Al Najar",
-    "Vibhuti Sahdev",
-    "Eden Tuck",
-    "Saeed Alsabawi",
-    "Nick Goudsbloem",
-    "Kareem Idris",
-    "Tyler Salari",
-    "Kieran Primeau",
-  ];
-
   const wavesArray = new Array(15).fill(0);
 
   return (
@@ -74,14 +59,6 @@ const AboutPage = () => {
           <img key={index} src={Waves} alt="Waves" style={styles.waves} />
         ))}
         <br />
-        <h2>Our Coders</h2>
-        <ul style={styles.codersList}>
-          {coders.map((coder) => (
-            <li key={coder} style={styles.coderName}>
-              {coder}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
