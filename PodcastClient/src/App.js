@@ -3,6 +3,7 @@ import "./App.css";
 import LoginSignup from "./Components/LoginSignupComponent/LoginSignup";
 import Home from "./Components/Home/Home";
 import AboutPage from "./Components/About/AboutPage";
+import { Footer } from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Signup" element={<LoginSignup />} />
         <Route path="/Log-in" element={<LoginSignup />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
