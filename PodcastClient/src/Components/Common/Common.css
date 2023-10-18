@@ -8,8 +8,9 @@
 
 .CommonButton {
   font-size: 16px;
-  background-color: #4caf50; /* A fresh green color */
+  background-color: #4caf50;
   transition: background-color 0.3s ease;
+  color: black;
 }
 
 .CommonButton:hover {
