@@ -70,16 +70,29 @@ app.get("/getUsers/:id", function (req, res) {
 app.post("/register", async(req, res) => {
   try{
     //create a password that is hashed 10 times
-    const hashedPassword = await bcrpty.hash(req.body.password, 10);
-  
-    var newUser = {
-      id: 0, //missing logic to set id
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword, //Hashes a given users password
-    }
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
 
-        //Database Code
+    const insertQuery = "INSERT INTO users (`username`, `password`, `email`) VALUES (?, ?)";
+    const selectQueryUsername = "SELECT * FROM users WHERE username = ?";
+
+    await db.insertQuery(selectQueryUsername, [username], (err, results) => {
+      if(err) {throw err;} //exit instantly if an error is hit
+      if(results.length > 0) {
+        //User is already in db
+        res.send({message: "Username already exists"});
+        //TODO ADD EMAIL CHECK
+      }// end if( user exsiting)
+      if (results.length === 0){
+        //a new user!
+        const hashedPassword = bcrpty.hash(req.body.password, 10);
+        db.insertQuery(insertQuery, [username, hashedPassword, email], (err, results) => {
+          if(err) {throw err;} //exit if error is hit
+          res.send({message:"User Created"}); 
+        })
+      }
+    });
   
     }catch{
       //Handle Errors
@@ -143,5 +156,5 @@ app.delete("/deleteUser/:id", (req, res) => {
 const server = app.listen(PORT, SERVER_ADDRESS, function () {
   const host = server.address().address;
   const port = server.address().port;
-  console.log("Example app listening at http://%s:%s", host, port);
+  console.log("Server listening at http://%s:%s", host, port);
 });
