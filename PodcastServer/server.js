@@ -9,8 +9,20 @@ const fs = require("fs");
 const bcrpty = require("bcrypt");
 const passport = require("passport");
 const { emit } = require("process");
+const db = require('./db');
+const { applyPairs } = require("angular-ui-router");
 
 app.use(bodyParser.json());
+
+
+//bypass cors error whiel testing
+app.user(cors({
+origin: 'http://localhost:3000',
+credentials: true
+}));
+
+app.use(passport.initialize()); //inilize the use of passport.js
+app.user(passport.session()); // allows a login sessions
 
 /* const readFile = (filePath) => {
   try {
