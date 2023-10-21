@@ -12,7 +12,7 @@ const { emit } = require("process");
 
 app.use(bodyParser.json());
 
-const readFile = (filePath) => {
+/* const readFile = (filePath) => {
   try {
     const data = fs.readFileSync(filePath, "utf-8");
     return data;
@@ -20,8 +20,8 @@ const readFile = (filePath) => {
     console.error("Error reading the file:", error.message);
     return null;
   }
-};
-const writeFile = (filePath, data) => {
+}; */
+/* const writeFile = (filePath, data) => {
   try {
     const jsonData = JSON.stringify(data, null, 2);
     fs.writeFileSync(filePath, jsonData);
@@ -29,7 +29,9 @@ const writeFile = (filePath, data) => {
   } catch (error) {
     console.error("Error writing to the file:", error.message);
   }
-};
+}; */
+
+
 
 app.get("/getUsers", function (req, res) {
   let data = readFile(__dirname + "/testdata/users.json");
@@ -51,21 +53,31 @@ app.get("/getUsers/:id", function (req, res) {
   res.end(user);
 });
 
-app.post("/addUser", async(req, res) => {
+
+//func to create and add a user to the data base
+app.post("/register", async(req, res) => {
   try{
-  //create a password that is hashed 10 times
-  const hashedPassword = await bcrpty.hash(req.body.password, 10);
+    //create a password that is hashed 10 times
+    const hashedPassword = await bcrpty.hash(req.body.password, 10);
+  
+    var newUser = {
+      id: 0, //missing logic to set id
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword, //Hashes a given users password
+    }
 
-  var newUser = {
-    id: 0, //missing logic to set id
-    name: req.body.name,
-    email: req.body.email,
-    password: hashedPassword, //Hashes a given users password
-  }
+        //Database Code
+  
+    }catch{
+      //Handle Errors
+    }
 
-  }catch{
-    //Handle Errors
-  }
+
+}); //End Register New User
+
+
+app.post("/addUser", async(req, res) => {
 
     //OLD 
   var oldUser = {
