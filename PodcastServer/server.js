@@ -1,11 +1,30 @@
 // Constant Values
 const SERVER_ADDRESS = "127.0.0.1";
 const PORT = "8081";
-
+const drive = require("./googledrive.json").web;
+const { google } = require("googleapis");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
+
+const oauth2Client = new google.auth.OAuth2(
+  drive.client_id,
+  drive.client_secret,
+  drive.redirect_uris[0]
+);
+
+oauth2Client.setCredentials({ refresh_token: drive.refresh_token });
+
+const access = google.drive({
+  version: "v3",
+  auth: oauth2Client,
+});
+
+if (access) {
+  console.log("Access granted!");
+  console.log(access);
+}
 
 app.use(bodyParser.json());
 
@@ -65,9 +84,7 @@ app.post("/addUser", (req, res) => {
   newUser.password = req.body.password;
   newUser.email = req.body.email;
 
-
-
-  //this is NOT SAFE and WILL be replaced with SQL auto 
+  //this is NOT SAFE and WILL be replaced with SQL auto
   //generated id after it gets added
   try {
     data.users[data.users.length] = newUser;
@@ -85,8 +102,8 @@ app.delete("/deleteUser/:id", (req, res) => {
   // TODO
   var data = JSON.parse(readFile(__dirname + "/testdata/users.json"));
 
-  for (var i = 0; i < data.users.length; i++){
-    if (data.users[i].id == req.params.id){
+  for (var i = 0; i < data.users.length; i++) {
+    if (data.users[i].id == req.params.id) {
       data.users[i] = undefined;
     }
   }

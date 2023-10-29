@@ -1,0 +1,12 @@
+{
+  "web": {
+    "client_id": "442709242685-l94vamp9gr5rpgtahqvnn98h1f27us3r.apps.googleusercontent.com",
+    "project_id": "driveapi-test-403515",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": ["https://developers.google.com/oauthplayground"],
+    "refresh_token": "1//046QCBEunzjjaCgYIARAAGAQSNwF-L9IrQAmIbnNDAayXSMOtMKnTY21JqEYNyIVzxfKfyCvmoy06e2sBbbR07HKYu77yNrP82yc"
+  }
+}
