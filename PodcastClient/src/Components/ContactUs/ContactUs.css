@@ -13,13 +13,6 @@
   text-decoration: underline;
 }
 
-body {
-  align-content: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .form-group {
   margin-bottom: 20px;
 }
