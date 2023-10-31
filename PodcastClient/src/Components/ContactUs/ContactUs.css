@@ -1,0 +1,101 @@
+.contact-us-container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 550px;
+}
+
+.contact-us-heading {
+  text-decoration: underline;
+}
+
+body {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label-style {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.contact-us-input,
+.contact-us-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #348138;
+}
+
+.about-logo {
+  display: block;
+  margin: 20px auto 0px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.contact-wrapper {
+  display: flex;
+  align-items: center; /* Centers the items vertically */
+  justify-content: center; /* Centers the items horizontally */
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.info-container {
+  display: flex;
+  justify-content: center; /* This will center the children horizontally */
+  align-items: center; /* This will vertically align the starting points of all divs */
+  flex-wrap: wrap; /* This will ensure the content wraps if there isn't enough space */
+  gap: 100px; /* Adds space between the children divs */
+  font-size: 16px;
+}
+
+.contact-info,
+.support-hours {
+  padding: 15px;
+  text-align: center;
+  margin-right: 200px;
+  font-size: 18px;
+}
+.map-container {
+  padding: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-support-column {
+  margin-right: 20px;
+}
+
+.find-us-title {
+  text-align: center;
+  margin: 40px;
+}
