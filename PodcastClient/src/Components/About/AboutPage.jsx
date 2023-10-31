@@ -5,21 +5,6 @@ import { HeaderBar } from "../Common/Common";
 import "./AboutPage.css";
 
 const AboutPage = () => {
-  const coders = [
-    "Ralph Constantin",
-    "Ryan Squire",
-    "Gavin Guerrette",
-    "Agnita Paul",
-    "Noor Al Najar",
-    "Vibhuti Sahdev",
-    "Eden Tuck",
-    "Saeed Alsabawi",
-    "Nick Goudsbloem",
-    "Kareem Idris",
-    "Tyler Salari",
-    "Kieran Primeau",
-  ];
-
   const wavesArray = new Array(15).fill(0);
 
   return (
@@ -75,14 +60,6 @@ const AboutPage = () => {
           <img key={index} src={Waves} alt="Waves" className="about-waves" />
         ))}
         <br />
-        <h2>Our Coders</h2>
-        <ul className="about-codersList">
-          {coders.map((coder) => (
-            <li key={coder} className="about-coderName">
-              {coder}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

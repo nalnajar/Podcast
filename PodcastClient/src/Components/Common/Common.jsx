@@ -32,14 +32,6 @@ function HeaderBar() {
       <Link to="/Home">
         <ButtonSB text="Home" marginRight={"10px"} />
       </Link>
-      <Link to="/About">
-        <ButtonSB
-          text="About"
-          onClick={() => {
-            /* Add your click handler here */
-          }}
-        />
-      </Link>
       <LoginSignup />
     </div>
   );

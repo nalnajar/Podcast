@@ -7,11 +7,12 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer footer2">
       <Link to="/about">About</Link>
       <Link to="/contact-us">Contact Us</Link>
       <TermsModal />
       <PrivacyModal />
+      <Link to="/DevPage">Dev Page</Link>
     </div>
   );
 };
