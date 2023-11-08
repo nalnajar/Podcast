@@ -1,0 +1,68 @@
+.about-container {
+  font-family: Arial, sans-serif;
+  margin: 2%;
+  text-align: center;
+}
+
+.about-title {
+  color: #333;
+  font-size: 2em;
+}
+
+.about-logo {
+  width: 250px;
+  height: auto;
+}
+
+.about-codersList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-coderName {
+  width: 26%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.about-row1,
+.about-row2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.about-row1 {
+  margin-bottom: 1%;
+}
+
+.about-row2 {
+  margin-bottom: 1.5rem;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.about-column {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.about-twoColumn {
+  margin-top: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.about-description {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.about-waves {
+  width: 100px;
+}

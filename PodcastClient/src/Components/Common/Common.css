@@ -1,0 +1,18 @@
+#Header {
+  border-bottom: 5px solid black;
+  height: 55px;
+  position: static;
+  background-color: #333;
+  padding: 8px 40px;
+}
+
+.CommonButton {
+  font-size: 16px;
+  background-color: #4caf50;
+  transition: background-color 0.3s ease;
+  color: black;
+}
+
+.CommonButton:hover {
+  background-color: #348138;
+}
