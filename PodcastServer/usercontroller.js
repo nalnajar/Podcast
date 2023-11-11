@@ -23,57 +23,54 @@ router.get("/getUsers/:id", (req, res) => {
  * Posts a new user to the database
  */
 router.post("/register", async (req, res) => {
-    const {username , password, email} = req.body //Get the body of the req into local vars
-    const hashedPassword = await bcrypt.hash(password, 10) // Hash Password
-    await db.query(`INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
+  const { username, password, email } = req.body; //Get the body of the req into local vars
+  const hashedPassword = await bcrypt.hash(password, 10); // Hash Password
+  await db.query(
+    `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
     [username, hashedPassword, email],
     (err, result, fields) => {
-        if (err) 
-        {
-          res.status(500).send(err);
-        }
-        else
-        {
+      if (err) {
+        res.status(500).send(err);
+      } else {
         console.log(result);
-          res.status(200).send("User Registered Successfully");
-        }
+        res.status(200).send("User Registered Successfully");
       }
-    );
-    });//addUser
-    
+    }
+  );
+}); //addUser
 
 /*
- * GETS a user in order to auth login from db
+ * POST a user in order to auth login from db
  */
-router.get("/login", async (req, res) => {
-    const { username, password } = req.body;
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
 
-    try {
-        const users = await db.query(
-            "SELECT * FROM users WHERE username = ?",
-            [username]
-        );
-            console.log(users[0]);
-            console.log(username);
-            //console.log(users);
-        if (users.length > 0) {
-            const hashedPassword = user[0].password; // Assuming the hashed password is stored in a 'password' column
+  await db.query(
+    `SELECT * FROM users WHERE username = ?`,
+    [username],
+    async (err, result, fields) => {
 
-            // Compare the provided password with the stored hashed password
-            const passwordMatch = await bcrypt.compare(password, hashedPassword);
+      if (err) {
+        res.status(500).send(err);
+      } 
+      else if (result.length > 0) {
+        const hashedPassword = result[0].password; // Assuming the hashed password is stored in a 'password' column
 
-            if (passwordMatch) {
-                res.status(200).send("Login Successful");
-            } else {
-                res.status(401).send("Incorrect Password");
-            }
-        } else {         
-            res.status(404).send("User not found");
+        // Compare the provided password with the stored hashed password
+        const passwordMatch = await bcrypt.compare(password, hashedPassword);
+
+        console.log(passwordMatch)
+        if (passwordMatch) {
+          res.status(200).send("Login Successful");
+        } else {
+          res.status(401).send("Incorrect Password");
         }
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Internal Server Error");
+      } 
+      else {
+        res.status(404).send("User not found");
+      }
     }
+  );
 });
 
 /*
@@ -84,15 +81,12 @@ router.delete("/deleteUser/:id", (req, res) => {
   db.query(
     `DELETE FROM users WHERE id=${req.params.id}`,
     (err, result, fields) => {
-      if (err) 
-      {
+      if (err) {
         res.status(500).send(err);
-      }
-      else
-      {
+      } else {
         res.send("User Registered Successfully");
       }
-      
+
       console.log(result);
     }
   );
@@ -105,12 +99,12 @@ router.delete("/deleteUser/:id", (req, res) => {
 /*
  * Gets all registered users from the database
  */
-router.get("/users", async (req, res) =>  {
-    console.log("Selecting all from the users table:");
-    await db.query("SELECT * FROM users", (err, result, fields) => {
-      if (err) throw err;
-      res.send(result);
-    });
+router.get("/users", async (req, res) => {
+  console.log("Selecting all from the users table:");
+  await db.query("SELECT * FROM users", (err, result, fields) => {
+    if (err) throw err;
+    res.send(result);
   });
+});
 
-  module.exports = router;
+module.exports = router;

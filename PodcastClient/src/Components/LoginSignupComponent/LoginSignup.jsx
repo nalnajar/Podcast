@@ -55,7 +55,10 @@ const LoginSignup = () => {
     e.preventDefault(); //test comment
     setFormErrors(validateLogin(formValuesLogin));
     setIsSubmit(true);
-    const response = await axios.get("http://localhost:8081/login", formValuesLogin);
+    const response = await axios.post(
+      "http://localhost:8081/login",
+       formValuesLogin
+       );
     if ((response.status = 200)) {
       setShowSuccessMessageLogin(true);
       setIsModalOpen(false);
