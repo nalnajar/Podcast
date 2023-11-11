@@ -5,7 +5,7 @@ import password from "../Assets/password.png";
 import google from "../Assets/google.png";
 import facebook from "../Assets/facebook.png";
 import { Modal } from "react-responsive-modal";
-import axios from 'axios';
+import axios from "axios";
 import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
 
@@ -40,15 +40,28 @@ const LoginSignup = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    console.log(formValues); //added these for backend to view the data that is parsed
-    const response = await axios.post('http://localhost:8081/register', formValues)
-    setShowSuccessMessage(true);
+    const response = await axios.post(
+      "http://localhost:8081/register",
+      formValues
+    );
+    if ((response.status = 200)) {
+      setShowSuccessMessage(true);
+      setIsModalOpen(false);
+    } else {
+      setShowSuccessMessage(false);
+    }
   };
-  const handleSubmitLogin = (e) => {
+  const handleSubmitLogin = async (e) => {
     e.preventDefault(); //test comment
     setFormErrors(validateLogin(formValuesLogin));
     setIsSubmit(true);
-    console.log(formValuesLogin); //added these for backend to view the data that is parsed
+    const response = await axios.get("http://localhost:8081/login", formValuesLogin);
+    if ((response.status = 200)) {
+      setShowSuccessMessageLogin(true);
+      setIsModalOpen(false);
+    } else {
+      setShowSuccessMessageLogin(false);
+    }
   };
 
   useEffect(() => {
