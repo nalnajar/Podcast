@@ -10,6 +10,7 @@
     "angular": "latest",
     "angular-ui-router": "latest",
     "body-parser": "latest",
+    "cors": "^2.8.5",
     "dat-gui": "latest",
     "express": "latest",
     "firebase": "^10.5.0",

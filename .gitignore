@@ -1,0 +1,28 @@
+# Compiled output
+/dist/
+
+# Node modules
+/node_modules/
+
+# IDE-specific files
+/.idea/
+/.vscode/
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE-specific files
+.vscode/
+*.code-workspace
+
+# Environment-specific files
+.env
+
+# Spring Boot properties files
+application.properties
+application.yml
