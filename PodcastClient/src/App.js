@@ -6,6 +6,7 @@ import AboutPage from "./Components/About/AboutPage";
 import DevPage from "./Components/DevPage/CodersComponent";
 import { Footer } from "./Components/Footer/Footer";
 import ContactUs from "./Components/ContactUs/ContactUs";
+import HelpPage from "./Components/HelpPage/HelpPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/Signup" element={<LoginSignup />} />
           <Route path="/Log-in" element={<LoginSignup />} />
           <Route path="/DevPage" element={<DevPage />}></Route>
+          <Route path="/HelpPage" element={<HelpPage />} />
         </Routes>
         <div class="footerContainer">
           <Footer />
