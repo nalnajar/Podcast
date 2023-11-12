@@ -50,7 +50,6 @@ function HelpPage() {
       },
     ];
 
-    // Filter results based on the input query
     const filteredResults = webResults.filter((result) =>
       result.title.toLowerCase().includes(query.toLowerCase())
     );
