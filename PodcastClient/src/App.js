@@ -15,10 +15,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/About" element={<AboutPage />} />
-          <Route path="/Contact-us" element={<ContactUs/>} />
+          <Route path="/Contact-us" element={<ContactUs />} />
           <Route path="/Signup" element={<LoginSignup />} />
           <Route path="/Log-in" element={<LoginSignup />} />
-          <Route path="/DevPage" element={<DevPage />}></Route>
+          <Route path="/DevPage" element={<DevPage />} />
         </Routes>
         <div class="footerContainer">
           <Footer />
