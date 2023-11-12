@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import './styles.css'; // Import the CSS file with your styles
+import './styles.css'; 
 
-
+// FAQQuestion component represents a single FAQ item
 function FAQQuestion(props) {
   const [isOpen, setIsOpen] = useState(false);
   
   return (
+        // Conditional styling based on whether the FAQ is open
     <div className={`faq-question ${isOpen ? 'faqQuestionOpen' : ''}`}>
       <div className="questionHeader" onClick={() => setIsOpen(!isOpen)}>
         <h3 className="faqQuestionH3">{props.question}</h3>
@@ -16,6 +17,7 @@ function FAQQuestion(props) {
   );
 }
 
+  // Handles input changes and triggers the search function
 function HelpPage() {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
@@ -25,8 +27,9 @@ function HelpPage() {
     searchFAQs(event.target.value);
   }
 
+    // Simulates searching FAQs based on a query
   function searchFAQs(query) {
-    // Simulated web search results
+    // Sample q n answers
     const webResults = [
       {
         title: "How do I change my profile pic?",
