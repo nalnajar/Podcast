@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css'; 
+import { HeaderBar } from "../Common/Common";
 
 // FAQQuestion component represents a single FAQ item
 function FAQQuestion(props) {
@@ -49,11 +50,11 @@ function HelpPage() {
   }
 
   return (
+    <>
+    <HeaderBar />
+
     <div className="help-container"> {/* Use the CSS class name */}
-      <header className="header">
-        <h1>Help Page</h1>
-        <button className="menuButton">Menu</button>
-      </header>
+    
       <section className="faqSection">
         <h2>Frequently Asked Questions</h2>
         <p>How can we assist you today?</p>
@@ -78,15 +79,12 @@ function HelpPage() {
       <div className="dropdown-list">
 
     </div>
-      <section className="otherSection">
-        <h2>Other Pages</h2>
-        <a className="otherSectionA" href="/contact">Contact Support</a>
-        <a className="otherSectionA" href="/links">Links Here</a>
-      </section>
+
     </div>
+    </>
   );
 }
 
-ReactDOM.render(<HelpPage />, document.getElementById('root'));
+//ReactDOM.render(<HelpPage />, document.getElementById('root'));
 
 export default HelpPage;
