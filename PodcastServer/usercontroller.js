@@ -22,19 +22,34 @@ router.get("/users/:id", async (req, res) => {
  */
 router.post("/register", async (req, res) => {
   const { username, password, email } = req.body; //Get the body of the req into local vars
-  const hashedPassword = await bcrypt.hash(password, 10); // Hash Password
+
   await db.query(
-    `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
-    [username, hashedPassword, email],
-    (err, result, fields) => {
+    `SELECT * FROM users WHERE email = ?`,
+    [email],
+    async (err, result, fields) => {
       if (err) {
         res.status(500).send(err);
-      } else {
-        console.log(result);
-        res.status(200).send("User Registered Successfully");
+      } else if (result.length > 0) {
+        const hashedPassword = await bcrypt.hash(password, 10); // Hash Password
+        await db.query(
+          `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
+          [username, hashedPassword, email],
+          (err, result, fields) => {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              console.log(result);
+              res.status(200).send("User Registered Successfully");
+            }
+          }
+        );//inner query(post)
+      }//end else if
+      else{
+        res.status(400).send("User Already Exists");
       }
-    }
-  );
+    });//outter query(select)
+  
+
 }); //addUser
 
 /*
