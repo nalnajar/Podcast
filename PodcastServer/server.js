@@ -1,15 +1,22 @@
+//IMPORTS
+import express from "express";
+import bodyParser from "body-parser";
+import moment from "moment";
+import mysql from "mysql";
+import fs from "fs";
+
 // Constant Values
 const SERVER_ADDRESS = "127.0.0.1";
 const PORT = "8081";
 
 const TEST_DATABASE_CONNECTION = false;
 
-const express = require("express");
-const bodyParser = require("body-parser");
+//const express = require("express");
+//const bodyParser = require("body-parser");
 const app = express();
-const fs = require("fs");
-const mysql = require("mysql");
-const moment = require("moment");
+//const fs = require("fs");
+//const mysql = require("mysql");
+//const moment = require("moment");
 
 const con = mysql.createConnection({
   host: "sql9.freesqldatabase.com",
