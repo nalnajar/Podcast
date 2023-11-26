@@ -24,6 +24,8 @@ class LoginSignup extends React.Component {
       isModalOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
   }
 
   handleChange(e) {
@@ -42,12 +44,19 @@ class LoginSignup extends React.Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    this.setState({ formErrors: this.validate(this.state.formValues) });
+    this.setState({
+      formErrors: this.validate({
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    });
     this.setState({ isSubmit: true });
-    const response = await axios.post(
-      "http://localhost:8081/register",
-      this.state.formValues
-    );
+    const response = await axios.post("http://localhost:8081/register", {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+    });
     if (response.status === 200) {
       this.setState({ showSuccessMessage: true, isModalOpen: false });
     } else {
@@ -58,12 +67,15 @@ class LoginSignup extends React.Component {
   async handleSubmitLogin(e) {
     //test commente.preventDefault();
     this.setState({
-      formErrors: this.validateLogin(this.state.formValuesLogin),
+      formErrors: this.validateLogin({
+        username: this.state.username,
+        password: this.state.password,
+      }),
       isSubmit: true,
     });
     const response = await axios.post(
-      "http://localhost:8081/login",
-      this.state.formValuesLogin
+      "http://localhost:8081/login", //this should be hashed then encrypted before call right?
+      { username: this.state.username, password: this.state.password }
     );
     if (response.status === 200) {
       this.setState({ showSuccessMessage: true, isModalOpen: false });
@@ -188,7 +200,7 @@ class LoginSignup extends React.Component {
               <div className="submitbutton-container">
                 <button
                   className="submit submitButton"
-                  onClick={this.state.handleSubmit}
+                  onClick={this.handleSubmit}
                 >
                   Submit
                 </button>
@@ -197,7 +209,7 @@ class LoginSignup extends React.Component {
               <div className="submitbutton-container">
                 <button
                   className="submit submitButton"
-                  onClick={this.state.handleSubmitLogin}
+                  onClick={this.handleSubmitLogin}
                 >
                   Submit
                 </button>
