@@ -179,3 +179,8 @@ div:empty {
   padding: 6px 10px;
   border-radius: 10px;
 }
+
+.react-responsive-modal-modal {
+  margin: 92px;
+  padding: 10px;
+}

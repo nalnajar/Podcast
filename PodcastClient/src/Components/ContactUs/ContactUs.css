@@ -1,0 +1,94 @@
+.contact-us-container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 550px;
+}
+
+.contact-us-heading {
+  text-decoration: underline;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label-style {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.contact-us-input,
+.contact-us-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #348138;
+}
+
+.about-logo {
+  display: block;
+  margin: 20px auto 0px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.contact-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  gap: 100px;
+}
+
+.contact-info,
+.support-hours {
+  padding: 15px;
+  text-align: center;
+  margin-right: 200px;
+  font-size: 18px;
+}
+.map-container {
+  padding: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.find-us-title {
+  text-align: center;
+  margin: 40px;
+}
+.testContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
