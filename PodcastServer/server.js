@@ -1,7 +1,7 @@
-
 const express = require("express");
 const cors = require("cors");
 const userController = require("./usercontroller");
+const postController = require("./postcontroller");
 
 // Constant Values
 const app = express();
@@ -13,7 +13,9 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Middleware to parse JSON in request body
 
 // Mount the userController routes
-app.use("/", userController);
+app.use("/", userController); //get rid of this one once the front-end is updated
+app.use("/users", userController);
+app.use("/posts", postController);
 
 const server = app.listen(PORT, SERVER_ADDRESS, function () {
   const host = server.address().address;

@@ -6,50 +6,37 @@ const router = express.Router(); //router for the controller
 /*
  * Gets a single user using an `id` value
  */
-router.get("/users/:id", async (req, res) => {
-    console.log("Selecting a user from the users table:");
-    await db.query(`SELECT * FROM users WHERE id = ?`,
+router.get("/:id", async (req, res) => {
+  console.log("Selecting a user from the users table:");
+  await db.query(
+    `SELECT * FROM users WHERE id = ?`,
     [req.body.id],
     (err, result, fields) => {
       if (err) {
         res.status(500).send(err);
       }
       res.status(200).send(result);
-    });
-  });
+    }
+  );
+});
 /*
  * Posts a new user to the database
  */
 router.post("/register", async (req, res) => {
   const { username, password, email } = req.body; //Get the body of the req into local vars
-
+  const hashedPassword = await bcrypt.hash(password, 10); // Hash Password
   await db.query(
-    `SELECT * FROM users WHERE email = ?`,
-    [email],
-    async (err, result, fields) => {
+    `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
+    [username, hashedPassword, email],
+    (err, result, fields) => {
       if (err) {
         res.status(500).send(err);
-      } else if (result.length > 0) {
-        const hashedPassword = await bcrypt.hash(password, 10); // Hash Password
-        await db.query(
-          `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
-          [username, hashedPassword, email],
-          (err, result, fields) => {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              console.log(result);
-              res.status(200).send("User Registered Successfully");
-            }
-          }
-        );//inner query(post)
-      }//end else if
-      else{
-        res.status(400).send("User Already Exists");
+      } else {
+        console.log(result);
+        res.status(200).send("User Registered Successfully");
       }
-    });//outter query(select)
-  
-
+    }
+  );
 }); //addUser
 
 /*
