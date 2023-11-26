@@ -19,8 +19,10 @@ class LoginSignup extends React.Component {
       password: "",
       formErrors: {},
       isSubmit: false,
-      showSuccessMessage: false,
+      showSuccessMessageRegister: false,
       showSuccessMessageLogin: false,
+      showFailMessageRegister: false,
+      showFaileMessageLogin: false,
       isModalOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -57,32 +59,48 @@ class LoginSignup extends React.Component {
       email: this.state.email,
       password: this.state.password,
     });
+
+    console.log(response);
     if (response.status === 200) {
-      this.setState({ showSuccessMessage: true, isModalOpen: false });
+      this.setState({ showSuccessMessageRegister: true, isModalOpen: false });
+      console.log("successful successfull");
     } else {
-      this.setState({ showSuccessMessage: false });
+      this.setState({ showFailMessageRegister: true });
+      console.log("none successfull");
     }
   }
 
   async handleSubmitLogin(e) {
-    //test commente.preventDefault();
-    this.setState({
-      formErrors: this.validateLogin({
+    e.preventDefault();
+    const formErrors = this.validateLogin({
+      username: this.state.username,
+      password: this.state.password,
+    });
+
+    if (Object.values(formErrors).every((error) => error === "")) {
+      this.setState({
+        formErrors: formErrors,
+        isSubmit: true,
+      });
+
+      const response = await axios.post("http://localhost:8081/login", {
         username: this.state.username,
         password: this.state.password,
-      }),
-      isSubmit: true,
-    });
-    const response = await axios.post(
-      "http://localhost:8081/login", //this should be hashed then encrypted before call right?
-      { username: this.state.username, password: this.state.password }
-    );
-    if (response.status === 200) {
-      this.setState({ showSuccessMessage: true, isModalOpen: false });
+      });
+
+      if (response.status === 200) {
+        this.setState({ showSuccessMessageLogin: true, isModalOpen: false });
+      } else {
+        this.setState({ showFailedMessageLogin: true });
+      }
     } else {
-      this.setState({ showSuccessMessage: false });
+      this.setState({
+        formErrors: formErrors,
+        isSubmit: false,
+      });
     }
   }
+
   //replace useEffect
   componentDidMount() {}
   componentDidUpdate() {}
@@ -129,11 +147,19 @@ class LoginSignup extends React.Component {
           onClose={() => this.setState({ isModalOpen: false })}
         >
           <div className="container">
-            {this.state.showSuccessMessage && (
+            {this.state.showSuccessMessageRegister && (
               <div className="ui message success">Signed up successfully</div>
+            )}
+            {this.state.showFailedMessageRegister && (
+              <div className="ui message failed">
+                Account or Password incorrect-temperror
+              </div>
             )}
             {this.state.showSuccessMessageLogin && (
               <div className="ui message success">Logged in successfully</div>
+            )}
+            {this.state.showFaileMessageLogin && (
+              <div className="ui message failed">Log in failed</div>
             )}
 
             <div className="header">
@@ -176,7 +202,7 @@ class LoginSignup extends React.Component {
                         name="email"
                         placeholder="Email"
                         value={this.state.email}
-                        onChange={this.handleEmail}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <p className="errorText">{this.state.formErrors.email}</p>
