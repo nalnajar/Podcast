@@ -176,7 +176,7 @@ class LoginSignup extends React.Component {
                         name="email"
                         placeholder="Email"
                         value={this.state.email}
-                        onChange={this.handleEmail}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <p className="errorText">{this.state.formErrors.email}</p>
