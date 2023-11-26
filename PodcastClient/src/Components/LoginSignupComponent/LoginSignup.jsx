@@ -54,19 +54,31 @@ class LoginSignup extends React.Component {
       }),
     });
     this.setState({ isSubmit: true });
-    const response = await axios.post("http://localhost:8081/register", {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-    });
 
-    console.log(response);
-    if (response.status === 200) {
-      this.setState({ showSuccessMessageRegister: true, isModalOpen: false });
-      console.log("successful successfull");
-    } else {
-      this.setState({ showFailMessageRegister: true });
-      console.log("none successfull");
+    try {
+      const response = await axios.post("http://localhost:8081/register", {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+      });
+
+      console.log(response);
+
+      if (response.status === 200) {
+        this.setState({ showSuccessMessageRegister: true, isModalOpen: false });
+        console.log("registration successful");
+        setTimeout(() => {
+          this.setState({ showSuccessMessageRegister: false });
+        }, 5000);
+      } else {
+        this.setState({ showFailMessageRegister: true });
+        console.log("registration unsuccessful");
+        setTimeout(() => {
+          this.setState({ showFailMessageRegister: false });
+        }, 5000);
+      }
+    } catch (error) {
+      console.error("An error occurred during registration:", error);
     }
   }
 
@@ -83,15 +95,29 @@ class LoginSignup extends React.Component {
         isSubmit: true,
       });
 
-      const response = await axios.post("http://localhost:8081/login", {
-        username: this.state.username,
-        password: this.state.password,
-      });
+      try {
+        const response = await axios.post("http://localhost:8081/login", {
+          username: this.state.username,
+          password: this.state.password,
+        });
 
-      if (response.status === 200) {
-        this.setState({ showSuccessMessageLogin: true, isModalOpen: false });
-      } else {
-        this.setState({ showFailedMessageLogin: true });
+        console.log(response);
+
+        if (response.status === 200) {
+          this.setState({ showSuccessMessageLogin: true, isModalOpen: false });
+          console.log("login successful");
+          setTimeout(() => {
+            this.setState({ showSuccessMessageLogin: false });
+          }, 5000);
+        } else {
+          this.setState({ showFailedMessageLogin: true });
+          console.log("login failed");
+          setTimeout(() => {
+            this.setState({ showFailedMessageLogin: false });
+          }, 5000);
+        }
+      } catch (error) {
+        console.error("An error occurred during login:", error);
       }
     } else {
       this.setState({
