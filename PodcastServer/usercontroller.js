@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10); // Hash Password
   await db.query(
     `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
-    [username, hashedPassword, email],
+    [username, password, email],
     (err, result, fields) => {
       if (err) {
         res.status(500).send(err);
@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
         const hashedPassword = result[0].password; // Assuming the hashed password is stored in a 'password' column
 
         // Compare the provided password with the stored hashed password
-        const passwordMatch = await bcrypt.compare(password, hashedPassword);
+        const passwordMatch = hashedPassword === password; //await bcrypt.compare(password, hashedPassword);
 
         if (passwordMatch) {
           res.status(200).send("Login Successful");
