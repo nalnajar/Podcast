@@ -2,7 +2,7 @@
 /dist/
 
 # Node modules
-/node_modules/
+**/node_modules/
 
 # IDE-specific files
 /.idea/
@@ -26,3 +26,5 @@ Thumbs.db
 # Spring Boot properties files
 application.properties
 application.yml
+
+**/package-lock.json
