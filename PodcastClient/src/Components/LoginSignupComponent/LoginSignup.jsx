@@ -1,76 +1,143 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import user from "../Assets/person.png";
 import email from "../Assets/email.png";
 import password from "../Assets/password.png";
 import google from "../Assets/google.png";
 import facebook from "../Assets/facebook.png";
 import { Modal } from "react-responsive-modal";
+import axios from "axios";
 import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
 
-const LoginSignup = () => {
-  const [action, setAction] = useState("Sign Up");
-  const initialValue = { username: "", email: "", password: "" };
-  const initialValuesLogin = { username: "", password: "" };
-  const [formValues, setFormValues] = useState(initialValue);
-  const [formValuesLogin, setFormValuesLogin] = useState(initialValuesLogin);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showSuccessMessageLogin, setShowSuccessMessageLogin] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Add modal open state
+class LoginSignup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      action: "Sign Up",
+      username: "",
+      email: "",
+      password: "",
+      formErrors: {},
+      isSubmit: false,
+      showSuccessMessageRegister: false,
+      showSuccessMessageLogin: false,
+      showFailMessageRegister: false,
+      showFaileMessageLogin: false,
+      isModalOpen: false,
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
+  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-    setFormValuesLogin({ ...formValues, [name]: value });
+  handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value });
+  }
+
+  clearfields() {
+    this.setState({ username: "", password: "", email: "" });
+  }
+
+  handleLoginButtonClick = () => {
+    this.clearfields();
+    this.setState({ action: "Login", isModalOpen: true });
   };
 
-  const handleLoginButtonClick = () => {
-    setAction("Login");
-    setIsModalOpen(true);
-  };
-  const handleSignUpButtonClick = () => {
-    setAction("Sign Up");
-    setIsModalOpen(true);
+  handleSignUpButtonClick = () => {
+    this.clearfields();
+    this.setState({ action: "Sign Up", isModalOpen: true });
   };
 
-  const handleSubmit = (e) => {
+  async handleSubmit(e) {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-    console.log(formValues); //added these for backend to view the data that is parsed
-  };
-  const handleSubmitLogin = (e) => {
-    e.preventDefault(); //test comment
-    setFormErrors(validateLogin(formValuesLogin));
-    setIsSubmit(true);
-    console.log(formValuesLogin); //added these for backend to view the data that is parsed
-  };
+    this.setState({
+      formErrors: this.validate({
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    });
+    this.setState({ isSubmit: true });
 
-  useEffect(() => {
-    if (
-      Object.keys(formErrors).length === 0 &&
-      isSubmit &&
-      action === "Sign Up"
-    ) {
-      setShowSuccessMessage(true);
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-      }, 5000);
-    } else if (
-      Object.keys(formErrors).length === 0 &&
-      isSubmit &&
-      action === "Login"
-    ) {
-      setShowSuccessMessageLogin(true);
-      setTimeout(() => {
-        setShowSuccessMessageLogin(false);
-      }, 2000);
+    try {
+      const response = await axios.post("http://localhost:8081/register", {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+      });
+
+      console.log(response);
+
+      if (response.status === 200) {
+        this.setState({ showSuccessMessageRegister: true, isModalOpen: false });
+        console.log("registration successful");
+        setTimeout(() => {
+          this.setState({ showSuccessMessageRegister: false });
+        }, 5000);
+      } else {
+        this.setState({ showFailMessageRegister: true });
+        console.log("registration unsuccessful");
+        setTimeout(() => {
+          this.setState({ showFailMessageRegister: false });
+        }, 5000);
+      }
+    } catch (error) {
+      console.error("An error occurred during registration:", error);
     }
-  }, [formErrors, isSubmit]);
+  }
 
-  const validate = (values) => {
+  async handleSubmitLogin(e) {
+    e.preventDefault();
+    const formErrors = this.validateLogin({
+      username: this.state.username,
+      password: this.state.password,
+    });
+
+    if (Object.values(formErrors).every((error) => error === "")) {
+      this.setState({
+        formErrors: formErrors,
+        isSubmit: true,
+      });
+
+      try {
+        const response = await axios.post("http://localhost:8081/login", {
+          username: this.state.username,
+          password: this.state.password,
+        });
+
+        console.log(response);
+
+        if (response.status === 200) {
+          this.setState({ showSuccessMessageLogin: true, isModalOpen: false });
+          console.log("login successful");
+          setTimeout(() => {
+            this.setState({ showSuccessMessageLogin: false });
+          }, 5000);
+        } else {
+          this.setState({ showFailedMessageLogin: true });
+          console.log("login failed");
+          setTimeout(() => {
+            this.setState({ showFailedMessageLogin: false });
+          }, 5000);
+        }
+      } catch (error) {
+        console.error("An error occurred during login:", error);
+      }
+    } else {
+      this.setState({
+        formErrors: formErrors,
+        isSubmit: false,
+      });
+    }
+  }
+
+  //replace useEffect
+  componentDidMount() {}
+  componentDidUpdate() {}
+
+  validate(values) {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.username) {
@@ -85,9 +152,9 @@ const LoginSignup = () => {
       errors.password = "Password is required!";
     }
     return errors;
-  };
+  }
 
-  const validateLogin = (values) => {
+  validateLogin(values) {
     const errors = {};
     if (!values.username) {
       errors.username = "Username is required!";
@@ -96,122 +163,139 @@ const LoginSignup = () => {
       errors.password = "Password is required!";
     }
     return errors;
-  };
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleSignUpButtonClick} className="CommonButton">
+          Sign Up
+        </button>
+        <button onClick={this.handleLoginButtonClick} className="CommonButton">
+          Log In
+        </button>
 
-  return (
-    <div>
-      <button onClick={handleSignUpButtonClick} className="CommonButton">
-        Sign Up
-      </button>
-      <button onClick={handleLoginButtonClick} className="CommonButton">
-        Log In
-      </button>
+        <Modal
+          open={this.state.isModalOpen}
+          onClose={() => this.setState({ isModalOpen: false })}
+        >
+          <div className="container">
+            {this.state.showSuccessMessageRegister && (
+              <div className="ui message success">Signed up successfully</div>
+            )}
+            {this.state.showFailedMessageRegister && (
+              <div className="ui message failed">
+                Account or Password incorrect-temperror
+              </div>
+            )}
+            {this.state.showSuccessMessageLogin && (
+              <div className="ui message success">Logged in successfully</div>
+            )}
+            {this.state.showFaileMessageLogin && (
+              <div className="ui message failed">Log in failed</div>
+            )}
 
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className="container">
-          {showSuccessMessage && (
-            <div className="ui message success">Signed up successfully</div>
-          )}
-          {showSuccessMessageLogin && (
-            <div className="ui message success">Logged in successfully</div>
-          )}
+            <div className="header">
+              <div className="text">{this.state.action}</div>
+              <div className="underline"></div>
+            </div>
+            <div className="inputs">
+              <div className="alt-login">
+                <div className="facebook">
+                  <img src={facebook} alt="" />
+                </div>
+                <div className="google">
+                  <img src={google} alt="" />
+                </div>
+              </div>
+              <p className="altLogin">Or {this.state.action} Using</p>
+              <form onSubmit={this.handleSubmit}>
+                <div className="input">
+                  <label>
+                    <img src={user} alt="" />
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="User Name"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <p className="errorText">{this.state.formErrors.username}</p>
 
-          <div className="header">
-            <div className="text">{action}</div>
-            <div className="underline"></div>
+                {this.state.action === "Login" ? (
+                  <div></div>
+                ) : (
+                  <>
+                    <div className="input">
+                      <img src={email} alt="" />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                    <p className="errorText">{this.state.formErrors.email}</p>
+                  </>
+                )}
+
+                <div className="input">
+                  <img src={password} alt="" />
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <p className="errorText">{this.state.formErrors.password}</p>
+              </form>
+            </div>
+            {this.state.action === "Sign Up" ? (
+              <div className="submitbutton-container">
+                <button
+                  className="submit submitButton"
+                  onClick={this.handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            ) : (
+              <div className="submitbutton-container">
+                <button
+                  className="submit submitButton"
+                  onClick={this.handleSubmitLogin}
+                >
+                  Submit
+                </button>
+              </div>
+            )}
+
+            {this.state.action === "Sign Up" ? (
+              <div className="forgot-password">
+                Already a Member? Click{" "}
+                <span
+                  onClick={() => {
+                    this.state.setState({ action: "Login" });
+                  }}
+                >
+                  Login
+                </span>{" "}
+                Below!
+              </div>
+            ) : (
+              <div className="forgot-password">
+                Lost Password? <span>Click Here!</span>
+              </div>
+            )}
           </div>
-          <div className="inputs">
-            <div className="alt-login">
-              <div className="facebook">
-                <img src={facebook} alt="" />
-              </div>
-              <div className="google">
-                <img src={google} alt="" />
-              </div>
-            </div>
-            <p className="altLogin">Or {action} Using</p>
-            <form onSubmit={handleSubmit}>
-              <div className="input">
-                <img src={user} alt="" />
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="User Name"
-                  value={formValues.username}
-                  onChange={handleChange}
-                />
-              </div>
-              <p className="errorText">{formErrors.username}</p>
-
-              {action === "Login" ? (
-                <div></div>
-              ) : (
-                <>
-                  <div className="input">
-                    <img src={email} alt="" />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      value={formValues.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <p className="errorText">{formErrors.email}</p>
-                </>
-              )}
-
-              <div className="input">
-                <img src={password} alt="" />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={formValues.password}
-                  onChange={handleChange}
-                />
-              </div>
-              <p className="errorText">{formErrors.password}</p>
-            </form>
-          </div>
-          {action === "Sign Up" ? (
-            <div className="submitbutton-container">
-              <button className="submit submitButton" onClick={handleSubmit}>
-                Submit
-              </button>
-            </div>
-          ) : (
-            <div className="submitbutton-container">
-              <button
-                className="submit submitButton"
-                onClick={handleSubmitLogin}
-              >
-                Submit
-              </button>
-            </div>
-          )}
-
-          {action === "Sign Up" ? (
-            <div className="forgot-password">
-              Already a Member? Click{" "}
-              <span
-                onClick={() => {
-                  setAction("Login");
-                }}
-              >
-                Login
-              </span>{" "}
-              Below!
-            </div>
-          ) : (
-            <div className="forgot-password">
-              Lost Password? <span>Click Here!</span>
-            </div>
-          )}
-        </div>
-      </Modal>
-    </div>
-  );
-};
+        </Modal>
+      </div>
+    );
+  }
+}
 
 export default LoginSignup;

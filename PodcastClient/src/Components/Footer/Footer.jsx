@@ -12,7 +12,6 @@ const Footer = () => {
       <Link to="/contact-us">Contact Us</Link>
       <TermsModal />
       <PrivacyModal />
-      <Link to="/HelpPage">Help</Link>
       <Link to="/DevPage">Dev Page</Link>
     </div>
   );

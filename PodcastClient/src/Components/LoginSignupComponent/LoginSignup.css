@@ -165,6 +165,19 @@ div:empty {
   z-index: 1000;
   width: 50%;
 }
+.ui.message.failed {
+  position: relative;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  width: 50%;
+}
 
 .errorText {
   color: red;
@@ -178,9 +191,4 @@ div:empty {
   margin: 1px;
   padding: 6px 10px;
   border-radius: 10px;
-}
-
-.react-responsive-modal-modal {
-  margin: 92px;
-  padding: 10px;
 }
