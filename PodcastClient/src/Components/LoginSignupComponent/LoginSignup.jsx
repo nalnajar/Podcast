@@ -34,11 +34,17 @@ class LoginSignup extends React.Component {
     this.setState({ [name]: value });
   }
 
+  clearfields() {
+    this.setState({ username: "", password: "", email: "" });
+  }
+
   handleLoginButtonClick = () => {
+    this.clearfields();
     this.setState({ action: "Login", isModalOpen: true });
   };
 
   handleSignUpButtonClick = () => {
+    this.clearfields();
     this.setState({ action: "Sign Up", isModalOpen: true });
   };
 
