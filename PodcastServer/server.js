@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import userController from "./usercontroller.js";
-import postController from "./postcontroller.js";
+import userController from "./Controllers/usercontroller.js";
+import postController from "./Controllers/postcontroller.js";
 
 // Constant Values
 const app = express();

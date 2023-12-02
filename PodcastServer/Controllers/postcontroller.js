@@ -1,5 +1,4 @@
-import db from "./db.js";
-import express from "express";
+import { express, db } from "./controllerimports.js";
 
 const postController = express.Router();
 

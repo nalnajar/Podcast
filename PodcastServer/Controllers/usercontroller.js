@@ -1,6 +1,5 @@
-import db from "./db.js";
 import bcrypt from "bcrypt";
-import express from "express";
+import { express, db } from "./controllerimports.js";
 
 const userController = express.Router(); //router for the controller
 /*
