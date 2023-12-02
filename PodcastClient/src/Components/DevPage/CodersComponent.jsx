@@ -102,7 +102,7 @@ const styles = {
   },
   name: {
     display: "block",
-    padding: "10.0px",
+    padding: "10px",
     textDecoration: "none",
     color: "#333",
     fontWeight: "bold",
