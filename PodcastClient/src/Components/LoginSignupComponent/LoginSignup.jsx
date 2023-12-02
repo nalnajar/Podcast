@@ -21,8 +21,8 @@ class LoginSignup extends React.Component {
       isSubmit: false,
       showSuccessMessageRegister: false,
       showSuccessMessageLogin: false,
-      showFailMessageRegister: false,
-      showFaileMessageLogin: false,
+      showFailedMessageRegister: false,
+      showFailedMessageLogin: false,
       isModalOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -76,15 +76,14 @@ class LoginSignup extends React.Component {
         setTimeout(() => {
           this.setState({ showSuccessMessageRegister: false });
         }, 5000);
-      } else {
-        this.setState({ showFailMessageRegister: true });
-        console.log("registration unsuccessful");
-        setTimeout(() => {
-          this.setState({ showFailMessageRegister: false });
-        }, 5000);
       }
     } catch (error) {
       console.error("An error occurred during registration:", error);
+      this.setState({ showFailedMessageRegister: true });
+      console.log("registration unsuccessful");
+      setTimeout(() => {
+        this.setState({ showFailedMessageRegister: false });
+      }, 5000);
     }
   }
 
@@ -110,20 +109,19 @@ class LoginSignup extends React.Component {
         console.log(response);
 
         if (response.status === 200) {
-          this.setState({ showSuccessMessageLogin: true, isModalOpen: false });
+          this.setState({ showSuccessMessageLogin: true, isModalOpen: true });
           console.log("login successful");
           setTimeout(() => {
             this.setState({ showSuccessMessageLogin: false });
           }, 5000);
-        } else {
-          this.setState({ showFailedMessageLogin: true });
-          console.log("login failed");
-          setTimeout(() => {
-            this.setState({ showFailedMessageLogin: false });
-          }, 5000);
         }
       } catch (error) {
         console.error("An error occurred during login:", error);
+        this.setState({ showFailedMessageLogin: true });
+        console.log("login failed");
+        setTimeout(() => {
+          this.setState({ showFailedMessageLogin: false });
+        }, 5000);
       }
     } else {
       this.setState({
@@ -183,15 +181,15 @@ class LoginSignup extends React.Component {
               <div className="ui message success">Signed up successfully</div>
             )}
             {this.state.showFailedMessageRegister && (
-              <div className="ui message failed">
-                Account or Password incorrect-temperror
-              </div>
+              <div className="ui message failed">Account Already Exists</div>
             )}
             {this.state.showSuccessMessageLogin && (
               <div className="ui message success">Logged in successfully</div>
             )}
-            {this.state.showFaileMessageLogin && (
-              <div className="ui message failed">Log in failed</div>
+            {this.state.showFailedMessageLogin && (
+              <div className="ui message failed">
+                Username or Password incorrect
+              </div>
             )}
 
             <div className="header">
