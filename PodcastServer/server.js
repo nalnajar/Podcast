@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const userController = require("./usercontroller");
-const postController = require("./postcontroller");
+import express from "express";
+import cors from "cors";
+import userController from "./usercontroller.js";
+import postController from "./postcontroller.js";
 
 // Constant Values
 const app = express();

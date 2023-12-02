@@ -1,12 +1,12 @@
-const db = require("./db");
-const express = require("express");
+import db from "./db.js";
+import express from "express";
 
-const router = express.Router();
+const postController = express.Router();
 
 const table = "posts";
 
 // Ping the controller
-router.get("/", async (req, res) => {
+postController.get("/", async (req, res) => {
   console.log("HIT /posts controller");
 });
 
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 /*
  * Get a single post via id
  */
-router.get("/getOne/:id", async (req, res) => {
+postController.get("/getOne/:id", async (req, res) => {
   console.log("posts/getOne/:id HIT");
   await db.query(
     `SELECT 1 FROM ${table} WHERE id=${req.params.id}`,
@@ -30,7 +30,7 @@ router.get("/getOne/:id", async (req, res) => {
 /*
  * Get all posts
  */
-router.get("/getAll", async (req, res) => {
+postController.get("/getAll", async (req, res) => {
   console.log("posts/getAll HIT");
   await db.query(`SELECT * FROM ${table}`, (err, result, fields) => {
     if (err) {
@@ -43,7 +43,7 @@ router.get("/getAll", async (req, res) => {
 /*
  * Get all post from userid
  */
-router.get("/getAllFromUser/:userid"),
+postController.get("/getAllFromUser/:userid"),
   async (req, res) => {
     console.log("posts/getAllFromUser/:id HIT");
     await db.query(
@@ -60,7 +60,7 @@ router.get("/getAllFromUser/:userid"),
 /*
  * Get posts with search
  */
-router.get("/search/:title"),
+postController.get("/search/:title"),
   async (req, res) => {
     console.log("posts/search/:title HIT");
     await db.query(
@@ -78,7 +78,7 @@ router.get("/search/:title"),
 /*
  * Add post
  */
-router.post("/postOne", async (req, res) => {
+postController.post("/postOne", async (req, res) => {
   const post = {
     title: req.body.title,
     text: req.body.text,
@@ -101,7 +101,7 @@ router.post("/postOne", async (req, res) => {
 });
 
 // Delete Calls
-router.delete("/deleteOne/:id", async (req, res) => {
+postController.delete("/deleteOne/:id", async (req, res) => {
   console.log("Deleting Post via id");
   await db.query(
     `DELETE FROM posts WHERE id=${req.body.id}`,
@@ -115,4 +115,4 @@ router.delete("/deleteOne/:id", async (req, res) => {
   );
 });
 
-module.exports = router;
+export default postController;
