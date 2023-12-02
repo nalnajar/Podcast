@@ -52,38 +52,50 @@ class LoginSignup extends React.Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    this.setState({
-      formErrors: this.validate({
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-      }),
+    const formErrors = this.validate({
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
     });
-    this.setState({ isSubmit: true });
 
-    try {
-      const response = await axios.post("http://localhost:8081/register", {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
+    if (Object.values(formErrors).every((error) => error === "")) {
+      this.setState({
+        formErrors: formErrors,
+        isSubmit: true,
       });
 
-      console.log(response);
+      try {
+        const response = await axios.post("http://localhost:8081/register", {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+        });
 
-      if (response.status === 200) {
-        this.setState({ showSuccessMessageRegister: true, isModalOpen: false });
-        console.log("registration successful");
+        console.log(response);
+
+        if (response.status === 200) {
+          this.setState({
+            showSuccessMessageRegister: true,
+            isModalOpen: false,
+          });
+          console.log("registration successful");
+          setTimeout(() => {
+            this.setState({ showSuccessMessageRegister: false });
+          }, 5000);
+        }
+      } catch (error) {
+        console.error("An error occurred during registration:", error);
+        this.setState({ showFailedMessageRegister: true });
+        console.log("registration unsuccessful");
         setTimeout(() => {
-          this.setState({ showSuccessMessageRegister: false });
+          this.setState({ showFailedMessageRegister: false });
         }, 5000);
       }
-    } catch (error) {
-      console.error("An error occurred during registration:", error);
-      this.setState({ showFailedMessageRegister: true });
-      console.log("registration unsuccessful");
-      setTimeout(() => {
-        this.setState({ showFailedMessageRegister: false });
-      }, 5000);
+    } else {
+      this.setState({
+        formErrors: formErrors,
+        isSubmit: false,
+      });
     }
   }
 
@@ -249,7 +261,12 @@ class LoginSignup extends React.Component {
                     onChange={this.handleChange}
                   />
                 </div>
+
                 <p className="errorText">{this.state.formErrors.password}</p>
+                <div className="forgot-password clickThis forgotCSS">
+                  {" "}
+                  Forgot Password?
+                </div>
               </form>
             </div>
             {this.state.action === "Sign Up" ? (
@@ -276,17 +293,26 @@ class LoginSignup extends React.Component {
               <div className="forgot-password">
                 Already a Member? Click{" "}
                 <span
+                  className="clickThis"
                   onClick={() => {
-                    this.state.setState({ action: "Login" });
+                    this.setState({ action: "Login" });
                   }}
                 >
-                  Login
+                  Here
                 </span>{" "}
-                Below!
               </div>
             ) : (
               <div className="forgot-password">
-                Lost Password? <span>Click Here!</span>
+                Don't have an account? Click{" "}
+                <span
+                  className="clickThis"
+                  onClick={() => {
+                    this.setState({ action: "Sign Up" });
+                  }}
+                >
+                  Here
+                </span>{" "}
+                to register.
               </div>
             )}
           </div>
