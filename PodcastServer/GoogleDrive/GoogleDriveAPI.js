@@ -2,6 +2,8 @@ import { google } from "googleapis";
 import readline from "readline";
 import fs from "fs";
 
+//UNUSED AS OF NOW! Potential to engage later for "Uploading"
+
 const SCOPES = ["https://www.googleapis.com/auth/drive"];
 
 const TOKEN_PATH = "token.json";
