@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GooglePicker from "./GooglePicker";
 import "./Common.css";
 import LoginSignup from "../LoginSignupComponent/LoginSignup";
 
@@ -27,11 +28,23 @@ function ButtonSB(props) {
 }
 
 function HeaderBar() {
+  var selectedData = { url: "", embeded: "" };
+  const callbk = (data) => {
+    selectedData = { url: data.url, embeded: data.embeded };
+  };
   return (
     <div id="Header">
       <Link to="/Home">
         <ButtonSB text="Home" marginRight={"10px"} />
       </Link>
+      <GooglePicker //please feel free to move, and the keys should be secrets retrieved from the server.
+        callback={callbk}
+        //token currently temp from OAuth Playground. Visit https://developers.google.com/oauthplayground to get started. Until we have OAuth2 credintials provided
+        token="ya29.a0AfB_byAa-kmj9XqHARaqq22ur4rpzFjDdJizYijw0ygXwuMMvNTUwNpHtscz31Xr-VbZPgExU-GHrQQ6EnuDC6JDk6Cq9ZyZ0FdZ3Q7yMC7BdLNvNu6U42cJloUVpI_EMcKzbkeO1RZnhY5hPHKD5YPhohHIfG9XTBOTaCgYKAdASARASFQHGX2MiuYxXk9kGHZTQLFuzwNlc1Q0171"
+        clientId="soundbarrier-f3c9e"
+        developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E" /*later to be called with our server API*/
+      />
+      <p color="cyan">{selectedData.url}</p>
       <LoginSignup />
     </div>
   );
