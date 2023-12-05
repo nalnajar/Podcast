@@ -1,169 +1,139 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 400px;
   margin: auto;
-  width: 600px !important;
-  background: #fff;
-  padding-bottom: 30px;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 9px;
-  width: 100%;
-  margin-top: 30px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .text {
-  color: black;
-  font-size: 50px;
-  font-weight: 400;
-  text-decoration: underline;
-  text-underline-position: under;
-  text-underline-offset: 8px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .inputs {
-  margin-top: 55px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  align-items: center;
+  gap: 20px;
 }
 
 .input {
   display: flex;
   align-items: center;
-  margin: auto;
-  width: 480px;
-  height: 80px;
-  background: whitesmoke;
-  border-radius: 6px;
+  width: 100%;
+  height: 50px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .input img {
-  margin: 0px 30px;
+  margin: 0 15px;
 }
 
 .input input {
-  height: 55px;
-  width: 400px;
+  flex: 1;
+  height: 100%;
+  padding: 0 15px;
   background: transparent;
   border: none;
   outline: none;
-  color: grey;
-  font-size: 20px;
+  color: #333;
+  font-size: 16px;
 }
 
 .forgot-password {
-  padding-left: 62px;
-  margin-top: 27px;
-  color: gray;
-  font-size: 19px;
+  text-align: right;
+
+  font-size: 14px;
 }
-.forgot-password span {
+
+.clickThis {
   color: blue;
   cursor: pointer;
 }
 
-.submit-container {
-  display: flex;
-  gap: 30px;
-  margin-left: 60px;
-  margin-right: 60px;
-  margin-top: 20px;
+.submitbutton-container {
+  width: 100%;
 }
 
 .submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 220px;
-  height: 59px;
-  color: white;
-  background: blue;
-  border-radius: 50px;
-  font-size: 20px;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.gray {
-  background: gray;
-  color: #fff;
-}
-
-.altLogin {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0px;
   width: 100%;
-}
-.alt-login {
-  width: 80%;
-  height: 3em;
-  display: flex;
-  justify-content: space-around;
-}
-
-.alt-login div {
-  width: 45%;
-  height: 90%;
-  border-radius: 3em;
-  background-repeat: no-repeat;
+  height: 50px;
+  color: #fff;
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
-}
-.google {
-  background-color: #df4930;
-}
-.facebook {
-  background-color: #507cc0;
-}
-
-.alt-login img {
-  padding-left: 90px;
-  background-size: contain;
-  height: 90%;
-  padding-top: 2px;
+  transition: background 0.3s, transform 0.3s;
 }
 
 .submit:hover {
-  transform: scale(1.1);
+  background: #0056b3;
 }
 
-.google:hover {
-  transform: scale(1.1);
-}
-.facebook:hover {
-  transform: scale(1.1);
-}
-div:empty {
-  display: none;
+.altLogin {
+  text-align: center;
+  margin-top: 20px;
+  color: #757575;
+  font-size: 14px;
 }
 
-.submitButton {
-  background-color: black;
+.alt-login {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
-.submitbutton-container {
-  padding-left: 310px;
-  padding-top: 25px;
+
+.alt-login div {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.google {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.facebook {
+  background-color: #3b5998;
 }
 
 .ui.message.success {
-  position: relative;
   text-align: center;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: #4caf50;
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 16px;
   z-index: 1000;
-  width: 50%;
+  width: 75%;
+}
+.ui.message.failed {
+  text-align: center;
+  background-color: rgb(237, 3, 3);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  width: 75%;
 }
 
 .errorText {
@@ -180,7 +150,6 @@ div:empty {
   border-radius: 10px;
 }
 
-.react-responsive-modal-modal {
-  margin: 92px;
-  padding: 10px;
+.forgotCSS {
+  padding-bottom: 10px;
 }

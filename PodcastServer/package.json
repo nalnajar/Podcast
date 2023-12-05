@@ -9,7 +9,9 @@
   "dependencies": {
     "angular": "latest",
     "angular-ui-router": "latest",
+    "bcrypt": "^5.1.1",
     "body-parser": "latest",
+    "cors": "^2.8.5",
     "dat-gui": "latest",
     "express": "latest",
     "firebase": "^10.5.0",
