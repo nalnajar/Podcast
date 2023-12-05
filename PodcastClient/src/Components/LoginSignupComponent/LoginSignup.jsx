@@ -24,10 +24,14 @@ class LoginSignup extends React.Component {
       showFailedMessageRegister: false,
       showFailedMessageLogin: false,
       isModalOpen: false,
+      isAuthenticated: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
+    this.handleSignUpButtonClick = this.handleSignUpButtonClick.bind(this);
   }
 
   handleChange(e) {
@@ -76,11 +80,13 @@ class LoginSignup extends React.Component {
         if (response.status === 200) {
           this.setState({
             showSuccessMessageRegister: true,
-            isModalOpen: false,
           });
           console.log("registration successful");
           setTimeout(() => {
             this.setState({ showSuccessMessageRegister: false });
+          }, 5000);
+          setTimeout(() => {
+            this.setState({ isModalOpen: false });
           }, 5000);
         }
       } catch (error) {
@@ -119,9 +125,17 @@ class LoginSignup extends React.Component {
         });
 
         console.log(response);
+        console.log(response.config.data);
 
         if (response.status === 200) {
-          this.setState({ showSuccessMessageLogin: true, isModalOpen: true });
+          localStorage.setItem("username", this.state.username);
+          console.log("username: ", response.data.username);
+
+          this.setState({
+            showSuccessMessageLogin: true,
+            isModalOpen: true,
+            isAuthenticated: true,
+          });
           console.log("login successful");
           setTimeout(() => {
             this.setState({ showSuccessMessageLogin: false });
@@ -143,9 +157,26 @@ class LoginSignup extends React.Component {
     }
   }
 
-  //replace useEffect
-  componentDidMount() {}
-  componentDidUpdate() {}
+  handleLogout() {
+    localStorage.removeItem("username");
+
+    this.setState({
+      isAuthenticated: false,
+      username: "",
+      password: "",
+      email: "",
+    });
+
+    window.location.reload(true);
+    window.location.href = "/Home";
+  }
+
+  componentDidMount() {
+    const username = localStorage.getItem("username");
+    if (username) {
+      this.setState({ isAuthenticated: true, username: username });
+    }
+  }
 
   validate(values) {
     const errors = {};
@@ -177,12 +208,31 @@ class LoginSignup extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleSignUpButtonClick} className="CommonButton">
-          Sign Up
-        </button>
-        <button onClick={this.handleLoginButtonClick} className="CommonButton">
-          Log In
-        </button>
+        {this.state.isAuthenticated ? (
+          <div>
+            <button onClick={this.handleLogout} className="CommonButton">
+              Logout
+            </button>
+            <button className="CommonButton">
+              Welcome, {this.state.username}!
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button
+              onClick={this.handleSignUpButtonClick}
+              className="CommonButton"
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={this.handleLoginButtonClick}
+              className="CommonButton"
+            >
+              Log In
+            </button>
+          </div>
+        )}
 
         <Modal
           open={this.state.isModalOpen}
@@ -218,7 +268,13 @@ class LoginSignup extends React.Component {
                 </div>
               </div>
               <p className="altLogin">Or {this.state.action} Using</p>
-              <form onSubmit={this.handleSubmit}>
+              <form
+                onSubmit={
+                  this.state.action === "Sign Up"
+                    ? this.handleSubmit
+                    : this.handleSubmitLogin
+                }
+              >
                 <div className="input">
                   <label>
                     <img src={user} alt="" />
