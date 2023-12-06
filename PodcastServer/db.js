@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+import mysql from "mysql";
 
 const db = mysql.createConnection({
   host: "sql9.freesqldatabase.com",
@@ -14,4 +14,4 @@ db.connect((err) => {
   });
 });
 
-module.exports = db;
+export default db;
