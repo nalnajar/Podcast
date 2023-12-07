@@ -131,6 +131,9 @@ class LoginSignup extends React.Component {
           localStorage.setItem("username", this.state.username);
           console.log("username: ", response.data.username);
 
+          window.location.reload(true);
+          window.location.href = "/Home";
+
           this.setState({
             showSuccessMessageLogin: true,
             isModalOpen: true,
@@ -207,7 +210,7 @@ class LoginSignup extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="CommonButtonAdjust">
         {this.state.isAuthenticated ? (
           <div>
             <button onClick={this.handleLogout} className="CommonButton">
@@ -218,7 +221,7 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         ) : (
-          <div>
+          <div className="">
             <button
               onClick={this.handleSignUpButtonClick}
               className="CommonButton"

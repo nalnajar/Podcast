@@ -59,6 +59,12 @@
   font-size: 14px;
 }
 
+.CommonButtonAdjust {
+  position: absolute;
+  top: 9px;
+  right: 42px;
+}
+
 .clickThis {
   color: blue;
   cursor: pointer;
