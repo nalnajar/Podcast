@@ -176,29 +176,18 @@ class LoginSignup extends React.Component {
     window.location.href = "/Home";
   }
 
-  //this method is for the upload button in the dropdown list
-  handleUpload = () => {
-    if (this.state.selectedFile !== null) {
-      console.log(`File uploaded: ${this.state.selectedFile}`);
-      this.setState({ isUploadModalOpen: false, selectedFile: null });
-    } else {
-      console.log("Please pick a file to upload!");
-    }
-  };
+  // handleUpload = () => {
+  //   this.setState({
+  //     isUploadModalOpen: true,
+  //   });
 
-  //this method is for the upload button in the dropdown list
-  handleUploadButton = () => {
-    this.setState({
-      isUploadModalOpen: true,
-    });
+  //   console.log("Upload clicked");
+  //   console.log();
+  // };
 
-    console.log("Upload clicked");
-    console.log();
-  };
-
-  handleFileChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-  };
+  // handleFileChange = (event) => {
+  //   this.setState({ selectedFile: event.target.files[0] });
+  // };
 
   componentDidMount() {
     const username = localStorage.getItem("username");
@@ -253,7 +242,15 @@ class LoginSignup extends React.Component {
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
-                <p onClick={this.handleUploadButton}>Upload</p>
+                <div>
+                  <GooglePicker
+                    clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
+                    developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
+                    callback={(data) => {
+                      console.log("GooglePicker data:", data);
+                    }}
+                  />
+                </div>
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
@@ -276,7 +273,7 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         )}
-        <Modal
+        {/* <Modal
           open={this.state.isUploadModalOpen}
           onClose={() =>
             this.setState({ isUploadModalOpen: false, selectedFile: null })
@@ -295,7 +292,7 @@ class LoginSignup extends React.Component {
               }}
             />
           </div>
-        </Modal>
+        </Modal> */}
 
         <Modal
           open={this.state.isModalOpen}

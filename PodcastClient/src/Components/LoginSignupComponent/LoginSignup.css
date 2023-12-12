@@ -167,8 +167,8 @@
   border: 1px solid #ddd;
   z-index: 1;
   top: 39px;
-  right: 11px;
   white-space: "nowrap";
+  right: 0px;
 }
 
 .dropdownContent p {
