@@ -29,19 +29,16 @@ class LoginSignup extends React.Component {
       isUploadModalOpen: false,
       selectedFile: null,
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
-    this.handleSignUpButtonClick = this.handleSignUpButtonClick.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value });
-  }
+  };
 
   clearfields() {
     this.setState({ username: "", password: "", email: "" });
