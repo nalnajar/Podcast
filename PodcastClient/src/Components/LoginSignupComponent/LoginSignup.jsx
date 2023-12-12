@@ -244,7 +244,7 @@ class LoginSignup extends React.Component {
               <div className="dropdownContent">
                 <div>
                   <GooglePicker
-                    clientId="soundbarrier-f3c9e"
+                    clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
                     developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
                     callback={(data) => {
                       console.log("GooglePicker data:", data);
