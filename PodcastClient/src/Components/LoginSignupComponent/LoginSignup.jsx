@@ -9,7 +9,6 @@ import axios from "axios";
 import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
 import GooglePicker from "../Common/GooglePicker";
-import GooglePicker from "../Common/GooglePicker";
 
 class LoginSignup extends React.Component {
   constructor(props) {
