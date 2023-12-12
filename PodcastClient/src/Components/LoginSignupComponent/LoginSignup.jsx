@@ -8,6 +8,7 @@ import { Modal } from "react-responsive-modal";
 import axios from "axios";
 import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
+import GooglePicker from "../Common/GooglePicker";
 
 class LoginSignup extends React.Component {
   constructor(props) {
@@ -27,19 +28,16 @@ class LoginSignup extends React.Component {
       isAuthenticated: false,
       isDropdownOpen: false,
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
-    this.handleSignUpButtonClick = this.handleSignUpButtonClick.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value });
-  }
+  };
 
   clearfields() {
     this.setState({ username: "", password: "", email: "" });
@@ -224,14 +222,22 @@ class LoginSignup extends React.Component {
         {this.state.isAuthenticated ? (
           <div>
             <button className="CommonButton" onClick={this.toggleDropdown}>
-              Welcome, {this.state.username}!
+              {this.state.username}
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
+                <div>
+                  <GooglePicker
+                    clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
+                    developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
+                    callback={(data) => {
+                      console.log("GooglePicker data:", data);
+                    }}
+                  />
+                </div>
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
-                <p>Upload</p>
               </div>
             )}
           </div>
@@ -251,7 +257,6 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         )}
-
         <Modal
           open={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
