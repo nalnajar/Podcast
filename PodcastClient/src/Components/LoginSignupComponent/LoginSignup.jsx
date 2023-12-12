@@ -27,9 +27,6 @@ class LoginSignup extends React.Component {
       isModalOpen: false,
       isAuthenticated: false,
       isDropdownOpen: false,
-      isUploadModalOpen: false,
-      selectedFile: null,
-      fileSelectionError: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
@@ -176,19 +173,6 @@ class LoginSignup extends React.Component {
     window.location.href = "/Home";
   }
 
-  // handleUpload = () => {
-  //   this.setState({
-  //     isUploadModalOpen: true,
-  //   });
-
-  //   console.log("Upload clicked");
-  //   console.log();
-  // };
-
-  // handleFileChange = (event) => {
-  //   this.setState({ selectedFile: event.target.files[0] });
-  // };
-
   componentDidMount() {
     const username = localStorage.getItem("username");
     if (username) {
@@ -273,25 +257,6 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         )}
-        {/* <Modal
-          open={this.state.isUploadModalOpen}
-          onClose={() => this.setState({ isUploadModalOpen: false })}
-          center
-          classNames={{
-            closeButton: "custom-close-button-class",
-          }}
-        >
-          <div>
-            <GooglePicker
-              clientId="soundbarrier-f3c9e"
-              developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
-              callback={(data) => {
-                console.log("GooglePicker data:", data);
-              }}
-            />
-          </div>
-        </Modal> */}
-
         <Modal
           open={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
