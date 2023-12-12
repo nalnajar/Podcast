@@ -1,0 +1,83 @@
+/* Header styles */
+.header {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  position: relative;
+}
+
+/* Style the links as buttons */
+.menuButton {
+  background-color: green;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: absolute;
+  top: 30px;
+  right: 50px;
+}
+
+/* FAQ Section styles */
+.faqSection {
+  background-color: lightgrey;
+  text-align: center;
+  padding: 20px;
+}
+
+.faq-question {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.faqQuestionH3 {
+  margin: 0;
+}
+
+/* Answer styles */
+.answer {
+  display: none;
+}
+
+.faqQuestionOpen .answer {
+  display: block;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid grey;
+}
+
+/* Other Pages Section styles */
+.otherSection {
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.otherSectionA {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #000000; /* Text color */
+  text-decoration: none;
+  border-radius: 4px; /* Rounded corners */
+  margin: 5px; /* Adjust the margin as needed */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.otherSectionA:hover {
+  color: #23db2c; /* Hover text color */
+  text-decoration: none;
+}
+
+/* Style for the "Other Pages" heading */
+.otherSection h2 {
+  margin: 0;
+}
+
+/* Style for links in the FAQ section */
+.searchResults a {
+  color: blue;
+  text-decoration: underline;
+}
