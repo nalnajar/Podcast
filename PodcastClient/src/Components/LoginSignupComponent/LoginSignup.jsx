@@ -25,6 +25,7 @@ class LoginSignup extends React.Component {
       showFailedMessageLogin: false,
       isModalOpen: false,
       isAuthenticated: false,
+      isUploadModalOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -174,6 +175,12 @@ class LoginSignup extends React.Component {
     window.location.href = "/Home";
   }
 
+  handleUpload() {
+    this.setState({
+      isUploadModalOpen: true,
+    });
+  }
+
   componentDidMount() {
     const username = localStorage.getItem("username");
     if (username) {
@@ -218,6 +225,9 @@ class LoginSignup extends React.Component {
             </button>
             <button className="CommonButton">
               Welcome, {this.state.username}!
+            </button>
+            <button onClick={this.handleUpload} className="CommonButton">
+              Upload
             </button>
           </div>
         ) : (
