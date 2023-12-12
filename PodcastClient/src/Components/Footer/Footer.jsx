@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TermsModal from "../Terms/TermsModal";
 import PrivacyModal from "../Privacy/PrivacyModal";
+import CommunityGuidelinesModal from "../CommunityGuidelines/CommunityGuidelinesModal";
 import "./Footer.css";
 
 const Footer = () => {
@@ -12,6 +13,7 @@ const Footer = () => {
       <Link to="/contact-us">Contact Us</Link>
       <TermsModal />
       <PrivacyModal />
+      <CommunityGuidelinesModal />
       <Link to="/HelpPage"> Questions & Answers</Link>
       <Link to="/DevPage">Dev Page</Link>
     </div>

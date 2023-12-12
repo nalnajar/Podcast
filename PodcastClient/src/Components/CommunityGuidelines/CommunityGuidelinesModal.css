@@ -1,0 +1,18 @@
+.guidelines-content {
+  height: 600px;
+  overflow-y: auto;
+}
+
+.guidelines-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  outline: none;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.guidelines-button:hover {
+  text-decoration: underline;
+  color: #4caf50;
+}
