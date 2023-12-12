@@ -34,7 +34,6 @@ class LoginSignup extends React.Component {
       podcastDescription: "",
       dataURL: "",
       dataEmbedded: null,
-      googlePickerTriggered: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
@@ -259,9 +258,7 @@ class LoginSignup extends React.Component {
     this.setState({ dataEmbedded: embedded });
     console.log("Updated dataEmbedded: ", embedded);
   };
-  setGooglePickerTriggered = (value) => {
-    this.setState({ googlePickerTriggered: value });
-  };
+
   handleSave = () => {
     const podcastDetails = {
       podcastTitle: this.state.podcastTitle,
