@@ -186,3 +186,15 @@
 .dropdownContent.show {
   display: block;
 }
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.uploadButton {
+  padding-top: 10px;
+}
+.custom-close-button-class {
+  display: none !important;
+}

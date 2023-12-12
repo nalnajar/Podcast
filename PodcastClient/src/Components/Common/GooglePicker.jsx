@@ -1,4 +1,8 @@
+// GooglePicker.jsx
+
+import React from "react";
 import useDrivePicker from "react-google-drive-picker";
+import "./GooglePicker.css"; // Import the CSS file
 
 export default function GooglePicker(props) {
   const [openPicker, authResponse] = useDrivePicker();
@@ -20,7 +24,7 @@ export default function GooglePicker(props) {
       developerKey: props.developerKey,
       viewId: "DOCS",
       supportDrives: false,
-      token: props.token, // when/if we get the oauth token
+      token: props.token,
       setIncludeFolders: true,
       multiselect: false,
       callbackFunction: pickerCallback,
@@ -28,11 +32,17 @@ export default function GooglePicker(props) {
   };
 
   return (
-    <div>
-      <button onClick={() => handleOpenPicker()}>Open Picker</button>
+    <div className="google-picker-container">
+      <button
+        className="google-picker-button"
+        onClick={() => handleOpenPicker()}
+      >
+        Upload Via Google
+      </button>
     </div>
   );
 }
+
 /* me trying to do it right. the npm library used doesn't have the capability to display 'MINE_ONLY'
 import { Component } from "react";
 import { defer } from "react-router-dom";
