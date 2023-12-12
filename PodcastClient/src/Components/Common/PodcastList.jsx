@@ -9,18 +9,29 @@ export default class PodcastList extends Component {
       data_list: props.data,
     };
   }
-  //Supposed to return a list of podcast data components look into flatlist?
-  //flatlist render each
+
+  handlePodcastClick = () => {
+    //Make it so when it is clicked, it opens a new tab or something and play the podcast selected
+
+    console.log("Podcast is clicked!"); //for testing
+  };
+
   render() {
     return (
       <div className="PodcastRow">
         <ul className="PodcastRow">
-          {this.state.data_list.map((podcast) => (
-            <PodcastData
-              name={podcast.name}
-              artist={podcast.artist}
-              collection={podcast.collection}
-            />
+          {this.state.data_list.map((podcast, index) => (
+            <button
+              key={index}
+              onClick={() => this.handlePodcastClick(podcast)}
+              className="PodcastButton"
+            >
+              <PodcastData
+                name={podcast.name}
+                artist={podcast.artist}
+                collection={podcast.collection}
+              />
+            </button>
           ))}
         </ul>
       </div>

@@ -44,5 +44,14 @@
 }
 
 .PodcastRow {
-  display: inline;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.PodcastButton {
+  border: none;
+  background-color: transparent;
 }
