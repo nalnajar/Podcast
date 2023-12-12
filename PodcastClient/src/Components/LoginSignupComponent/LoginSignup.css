@@ -167,8 +167,8 @@
   border: 1px solid #ddd;
   z-index: 1;
   top: 39px;
-  right: 11px;
   white-space: "nowrap";
+  right: 0px;
 }
 
 .dropdownContent p {
@@ -185,4 +185,16 @@
 
 .dropdownContent.show {
   display: block;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.uploadButton {
+  padding-top: 10px;
+}
+.custom-close-button-class {
+  display: none !important;
 }
