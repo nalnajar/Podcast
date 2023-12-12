@@ -169,11 +169,12 @@ class LoginSignup extends React.Component {
     //
     var publish = {
       uri: post,
-      //title:
-      //artistid:
+      title: this.state.podcastTitle,
+      artistid: this.state.username,
       //description?:
     };
-    const response = await axios.post();
+
+    const response = await axios.post(/*uri to db with publish as body*/);
   }
 
   handleLogout() {
