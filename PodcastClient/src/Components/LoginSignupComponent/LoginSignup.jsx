@@ -187,10 +187,6 @@ class LoginSignup extends React.Component {
     console.log();
   };
 
-  // handleFileChange = (event) => {
-  //   this.setState({ selectedFile: event.target.files[0] });
-  // };
-
   componentDidMount() {
     const username = localStorage.getItem("username");
     if (username) {
@@ -240,7 +236,7 @@ class LoginSignup extends React.Component {
         {this.state.isAuthenticated ? (
           <div>
             <button className="CommonButton" onClick={this.toggleDropdown}>
-              Welcome, {this.state.username}!
+              {this.state.username}
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">

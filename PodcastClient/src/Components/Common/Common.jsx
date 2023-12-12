@@ -35,7 +35,9 @@ function HeaderBar() {
   return (
     <div id="Header">
       <Link to="/Home">
-        <ButtonSB text="Home" marginRight={"10px"} />
+        <div className="ButtonAdjust">
+          <button className="CommonButton2 CommonButton">Home</button>
+        </div>
       </Link>
       <p color="cyan">{selectedData.url}</p>
       <LoginSignup />
