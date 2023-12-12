@@ -1,8 +1,6 @@
-// GooglePicker.jsx
-
 import React from "react";
 import useDrivePicker from "react-google-drive-picker";
-import "./GooglePicker.css"; // Import the CSS file
+import "./GooglePicker.css";
 
 export default function GooglePicker(props) {
   const [openPicker, authResponse] = useDrivePicker();

@@ -176,18 +176,18 @@ class LoginSignup extends React.Component {
     window.location.href = "/Home";
   }
 
-  handleUpload = () => {
-    this.setState({
-      isUploadModalOpen: true,
-    });
+  // handleUpload = () => {
+  //   this.setState({
+  //     isUploadModalOpen: true,
+  //   });
 
-    console.log("Upload clicked");
-    console.log();
-  };
+  //   console.log("Upload clicked");
+  //   console.log();
+  // };
 
-  handleFileChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-  };
+  // handleFileChange = (event) => {
+  //   this.setState({ selectedFile: event.target.files[0] });
+  // };
 
   componentDidMount() {
     const username = localStorage.getItem("username");
@@ -242,7 +242,15 @@ class LoginSignup extends React.Component {
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
-                <p onClick={this.handleUpload}>Upload</p>
+                <div>
+                  <GooglePicker
+                    clientId="soundbarrier-f3c9e"
+                    developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
+                    callback={(data) => {
+                      console.log("GooglePicker data:", data);
+                    }}
+                  />
+                </div>
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
@@ -265,7 +273,7 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         )}
-        <Modal
+        {/* <Modal
           open={this.state.isUploadModalOpen}
           onClose={() => this.setState({ isUploadModalOpen: false })}
           center
@@ -282,7 +290,7 @@ class LoginSignup extends React.Component {
               }}
             />
           </div>
-        </Modal>
+        </Modal> */}
 
         <Modal
           open={this.state.isModalOpen}
