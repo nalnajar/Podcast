@@ -27,6 +27,11 @@ class LoginSignup extends React.Component {
       isModalOpen: false,
       isAuthenticated: false,
       isDropdownOpen: false,
+      isUploadModalOpen: false,
+      selectedFile: null,
+      fileSelectionError: false,
+      podcastTitle: "",
+      podcastDescription: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
@@ -173,6 +178,15 @@ class LoginSignup extends React.Component {
     window.location.href = "/Home";
   }
 
+  handleUpload = () => {
+    this.setState({
+      isUploadModalOpen: true,
+    });
+
+    console.log("Upload clicked");
+    console.log();
+  };
+
   componentDidMount() {
     const username = localStorage.getItem("username");
     if (username) {
@@ -226,15 +240,7 @@ class LoginSignup extends React.Component {
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
-                <div>
-                  <GooglePicker
-                    clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
-                    developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
-                    callback={(data) => {
-                      console.log("GooglePicker data:", data);
-                    }}
-                  />
-                </div>
+                <p onClick={this.handleUpload}>Upload</p>
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
@@ -257,6 +263,51 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         )}
+        <Modal
+          open={this.state.isUploadModalOpen}
+          onClose={() =>
+            this.setState({ isUploadModalOpen: false, selectedFile: null })
+          }
+          center
+          classNames={{
+            closeButton: "custom-close-button-class",
+            modal: "custom-modal-size", // Adding custom class for modal size
+          }}
+        >
+          <h2 style={{ textAlign: "center", marginBottom: 20 }}>
+            Upload Podcast
+          </h2>
+          <div className="upload-form">
+            <label>Podcast Title</label>
+            <input
+              type="text"
+              id="podcastTitle"
+              placeholder="Enter podcast title"
+              value={this.state.podcastTitle}
+              onChange={(e) => this.setState({ podcastTitle: e.target.value })}
+            />
+
+            <label>Description</label>
+            <textarea
+              id="podcastDescription"
+              placeholder="Enter podcast descrption"
+              value={this.state.podcastDescription}
+              onChange={(e) =>
+                this.setState({ podcastDescription: e.target.value })
+              }
+            />
+          </div>
+          <div style={{ marginTop: 20, textAlign: "right" }}>
+            <GooglePicker
+              clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
+              developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
+              callback={(data) => {
+                console.log("GooglePicker data:", data);
+              }}
+            />
+          </div>
+        </Modal>
+
         <Modal
           open={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
