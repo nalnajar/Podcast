@@ -235,10 +235,10 @@ class LoginSignup extends React.Component {
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
+                <p onClick={this.handleUpload}>Upload</p>
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
-                <p onClick={this.handleUpload}>Upload</p>
               </div>
             )}
           </div>
@@ -258,7 +258,11 @@ class LoginSignup extends React.Component {
             </button>
           </div>
         )}
-
+        <Modal
+          open={this.state.isUploadModalOpen}
+          onClose={() => this.setState({ isUploadModalOpen: false })}
+          center
+        ></Modal>
         <Modal
           open={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
