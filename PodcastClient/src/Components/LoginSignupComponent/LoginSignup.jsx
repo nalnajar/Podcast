@@ -233,9 +233,14 @@ class LoginSignup extends React.Component {
             <button className="CommonButton" onClick={this.toggleDropdown}>
               Welcome, {this.state.username}!
             </button>
-            <button className="CommonButton" onClick={this.handleUpload}>
-              Upload
-            </button>
+            {this.state.isDropdownOpen && (
+              <div className="dropdownContent">
+                <p>View Profile</p>
+                <p>Manage Account</p>
+                <p onClick={this.handleLogout}>Logout</p>
+                <p onClick={this.handleUpload}>Upload</p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="">
