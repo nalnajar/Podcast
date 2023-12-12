@@ -34,6 +34,7 @@ class LoginSignup extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
     this.handleSignUpButtonClick = this.handleSignUpButtonClick.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
   }
 
   handleChange(e) {
@@ -180,6 +181,9 @@ class LoginSignup extends React.Component {
     this.setState({
       isUploadModalOpen: true,
     });
+
+    console.log("Upload clicked");
+    console.log();
   }
 
   componentDidMount() {
