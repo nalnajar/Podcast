@@ -27,6 +27,7 @@ class LoginSignup extends React.Component {
       isAuthenticated: false,
       isDropdownOpen: false,
       isUploadModalOpen: false,
+      selectedFile: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -185,6 +186,10 @@ class LoginSignup extends React.Component {
     console.log();
   };
 
+  handleFileChange = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+  };
+
   componentDidMount() {
     const username = localStorage.getItem("username");
     if (username) {
@@ -265,7 +270,10 @@ class LoginSignup extends React.Component {
           open={this.state.isUploadModalOpen}
           onClose={() => this.setState({ isUploadModalOpen: false })}
           center
-        ></Modal>
+        >
+          <input type="file" onChange={this.handleFileChange}></input>
+          <button>Upload</button>
+        </Modal>
         <Modal
           open={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
