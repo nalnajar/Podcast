@@ -231,6 +231,7 @@ class LoginSignup extends React.Component {
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
+                <p>Upload</p>
               </div>
             )}
           </div>
