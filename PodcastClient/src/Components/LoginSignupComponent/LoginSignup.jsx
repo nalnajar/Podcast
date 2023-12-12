@@ -257,6 +257,7 @@ class LoginSignup extends React.Component {
 
   setDataEmbedded = (embedded) => {
     this.setState({ dataEmbedded: embedded });
+    console.log("Updated dataEmbedded: ", embedded);
   };
   setGooglePickerTriggered = (value) => {
     this.setState({ googlePickerTriggered: value });
