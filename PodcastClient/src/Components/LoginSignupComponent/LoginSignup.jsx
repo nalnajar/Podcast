@@ -164,6 +164,18 @@ class LoginSignup extends React.Component {
     }
   }
 
+  async publishPodcast(post) {
+    //callback from picker is only URI
+    //
+    var publish = {
+      uri: post,
+      //title:
+      //artistid:
+      //description?:
+    };
+    const response = await axios.post();
+  }
+
   handleLogout() {
     localStorage.removeItem("username");
 
@@ -305,6 +317,7 @@ class LoginSignup extends React.Component {
             <GooglePicker
               clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
               developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
+              //callback={this.publishPodcast}
               callback={(data) => {
                 console.log("GooglePicker data:", data);
               }}
