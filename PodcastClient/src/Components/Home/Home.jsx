@@ -4,7 +4,7 @@ import React from "react";
 
 const Home = () => {
   var data = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 50; i++) {
     data.push({
       name: "PodcastName",
       artist: "PodcastArtist",
