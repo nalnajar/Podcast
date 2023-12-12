@@ -32,6 +32,9 @@ class LoginSignup extends React.Component {
       fileSelectionError: false,
       podcastTitle: "",
       podcastDescription: "",
+      dataURL: "",
+      dataEmbedded: null,
+      googlePickerTriggered: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
@@ -247,6 +250,40 @@ class LoginSignup extends React.Component {
     console.log("Is clicked");
   };
 
+  setDataURL = (url) => {
+    this.setState({ dataURL: url });
+    console.log("Updated dataURL:", url);
+  };
+
+  setDataEmbedded = (embedded) => {
+    this.setState({ dataEmbedded: embedded });
+  };
+  setGooglePickerTriggered = (value) => {
+    this.setState({ googlePickerTriggered: value });
+  };
+  handleSave = () => {
+    const podcastDetails = {
+      podcastTitle: this.state.podcastTitle,
+      podcastDescription: this.state.podcastDescription,
+      dataURL: this.state.dataURL,
+      dataEmbedded:
+        this.state.dataEmbedded !== null
+          ? this.state.dataEmbedded
+          : "No embed data available",
+    };
+    console.log(podcastDetails);
+
+    // For Gavin: Do something with the podcastDetails object, such as saving it to state or sending it to an API or backend. So whereever we are sending this shiiiiiiit
+
+    this.setState({
+      podcastTitle: "",
+      podcastDescription: "",
+      dataURL: "",
+      dataEmbedded: null,
+      isUploadModalOpen: false,
+    });
+  };
+
   render() {
     return (
       <div className="CommonButtonAdjust">
@@ -288,7 +325,7 @@ class LoginSignup extends React.Component {
           center
           classNames={{
             closeButton: "custom-close-button-class",
-            modal: "custom-modal-size", // Adding custom class for modal size
+            modal: "custom-modal-size",
           }}
         >
           <h2 style={{ textAlign: "center", marginBottom: 20 }}>
@@ -307,23 +344,43 @@ class LoginSignup extends React.Component {
             <label>Description</label>
             <textarea
               id="podcastDescription"
-              placeholder="Enter podcast descrption"
+              placeholder="Enter podcast description"
               value={this.state.podcastDescription}
               onChange={(e) =>
                 this.setState({ podcastDescription: e.target.value })
               }
             />
           </div>
-          <div style={{ marginTop: 20, textAlign: "right" }}>
+          <div style={{ marginTop: 20 }}>
             <GooglePicker
               clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
               developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
-              //callback={this.publishPodcast}
               callback={(data) => {
                 console.log("GooglePicker data:", data);
+                this.setDataURL(data.url);
+                this.setDataEmbedded(data.embeded);
               }}
             />
+            <div id="myEmptyDiv" style={{ marginTop: 10, textAlign: "left" }}>
+              <p>
+                Data URL:{" "}
+                <a
+                  href={this.state.dataURL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {this.state.dataURL}
+                </a>
+              </p>
+              <p>
+                Embed:{" "}
+                {this.state.dataEmbedded !== null
+                  ? this.state.dataEmbedded
+                  : "No embed data available"}
+              </p>
+            </div>
           </div>
+          <button onClick={this.handleSave}>Save Podcast</button>
         </Modal>
 
         <Modal
