@@ -222,7 +222,7 @@ class LoginSignup extends React.Component {
         {this.state.isAuthenticated ? (
           <div>
             <button className="CommonButton" onClick={this.toggleDropdown}>
-              Welcome, {this.state.username}!
+              {this.state.username}
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
