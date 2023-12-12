@@ -25,6 +25,7 @@ class LoginSignup extends React.Component {
       showFailedMessageLogin: false,
       isModalOpen: false,
       isAuthenticated: false,
+      isDropdownOpen: false,
       isUploadModalOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -215,18 +216,24 @@ class LoginSignup extends React.Component {
     }
     return errors;
   }
+
+  toggleDropdown = () => {
+    this.setState((prevState) => ({
+      isDropdownOpen: !prevState.isDropdownOpen,
+    }));
+
+    console.log("Is clicked");
+  };
+
   render() {
     return (
       <div className="CommonButtonAdjust">
         {this.state.isAuthenticated ? (
           <div>
-            <button onClick={this.handleLogout} className="CommonButton">
-              Logout
-            </button>
-            <button className="CommonButton">
+            <button className="CommonButton" onClick={this.toggleDropdown}>
               Welcome, {this.state.username}!
             </button>
-            <button onClick={this.handleUpload} className="CommonButton">
+            <button className="CommonButton" onClick={this.handleUpload}>
               Upload
             </button>
           </div>
