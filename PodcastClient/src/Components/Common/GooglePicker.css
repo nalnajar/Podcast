@@ -1,0 +1,21 @@
+.google-picker-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.google-picker-button {
+  background-color: #4285f4;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.google-picker-button:hover {
+  background-color: #3a73b7;
+}

@@ -9,6 +9,7 @@ import axios from "axios";
 import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
 import GooglePicker from "../Common/GooglePicker";
+import GooglePicker from "../Common/GooglePicker";
 
 class LoginSignup extends React.Component {
   constructor(props) {
@@ -29,20 +30,18 @@ class LoginSignup extends React.Component {
       isDropdownOpen: false,
       isUploadModalOpen: false,
       selectedFile: null,
+      fileSelectionError: false,
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
-    this.handleSignUpButtonClick = this.handleSignUpButtonClick.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value });
-  }
+  };
 
   clearfields() {
     this.setState({ username: "", password: "", email: "" });
@@ -284,10 +283,21 @@ class LoginSignup extends React.Component {
             this.setState({ isUploadModalOpen: false, selectedFile: null })
           }
           center
+          classNames={{
+            closeButton: "custom-close-button-class",
+          }}
         >
-          <input type="file" onChange={this.handleFileChange}></input>
-          <button onClick={this.handleUpload}>Upload</button>
+          <div>
+            <GooglePicker
+              clientId="soundbarrier-f3c9e"
+              developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
+              callback={(data) => {
+                console.log("GooglePicker data:", data);
+              }}
+            />
+          </div>
         </Modal>
+
         <Modal
           open={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
