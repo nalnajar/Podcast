@@ -198,3 +198,36 @@
 .custom-close-button-class {
   display: none !important;
 }
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upload-form label {
+  margin-bottom: 5px;
+}
+
+.upload-form input {
+  width: 250px;
+}
+
+.upload-form textarea {
+  height: 100px;
+}
+
+.upload-form input,
+.upload-form textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.custom-modal-size {
+  width: 60%;
+  max-width: 600px;
+  height: auto;
+  padding: 20px;
+}
