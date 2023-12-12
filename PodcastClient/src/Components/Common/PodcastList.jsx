@@ -1,5 +1,5 @@
 //Props Title, Podcast List Data
-import { Component, FlatList, SafeAreaView } from "react";
+import { Component } from "react";
 import PodcastData from "./PodcastData";
 
 export default class PodcastList extends Component {
@@ -13,18 +13,17 @@ export default class PodcastList extends Component {
   //flatlist render each
   render() {
     return (
-      <SafeAreaView>
-        <FlatList
-          data={this.state.data_list}
-          renderItem={({ item }) => (
+      <div className="PodcastRow">
+        <ul className="PodcastRow">
+          {this.state.data_list.map((podcast) => (
             <PodcastData
-              name={item.name}
-              artist={item.artist}
-              collection={item.collection}
+              name={podcast.name}
+              artist={podcast.artist}
+              collection={podcast.collection}
             />
-          )}
-        />
-      </SafeAreaView>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
