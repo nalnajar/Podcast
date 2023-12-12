@@ -8,6 +8,7 @@ import { Modal } from "react-responsive-modal";
 import axios from "axios";
 import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
+import GooglePicker from "../Common/GooglePicker";
 
 class LoginSignup extends React.Component {
   constructor(props) {
@@ -177,7 +178,18 @@ class LoginSignup extends React.Component {
     window.location.href = "/Home";
   }
 
+  //this method is for the upload button in the dropdown list
   handleUpload = () => {
+    if (this.state.selectedFile !== null) {
+      console.log(`File uploaded: ${this.state.selectedFile}`);
+      this.setState({ isUploadModalOpen: false, selectedFile: null });
+    } else {
+      console.log("Please pick a file to upload!");
+    }
+  };
+
+  //this method is for the upload button in the dropdown list
+  handleUploadButton = () => {
     this.setState({
       isUploadModalOpen: true,
     });
@@ -243,7 +255,7 @@ class LoginSignup extends React.Component {
             </button>
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
-                <p onClick={this.handleUpload}>Upload</p>
+                <p onClick={this.handleUploadButton}>Upload</p>
                 <p>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
@@ -268,11 +280,13 @@ class LoginSignup extends React.Component {
         )}
         <Modal
           open={this.state.isUploadModalOpen}
-          onClose={() => this.setState({ isUploadModalOpen: false })}
+          onClose={() =>
+            this.setState({ isUploadModalOpen: false, selectedFile: null })
+          }
           center
         >
           <input type="file" onChange={this.handleFileChange}></input>
-          <button>Upload</button>
+          <button onClick={this.handleUpload}>Upload</button>
         </Modal>
         <Modal
           open={this.state.isModalOpen}
