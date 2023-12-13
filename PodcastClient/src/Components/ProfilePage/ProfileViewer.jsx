@@ -9,9 +9,25 @@ const UserPage = () => {
   const [userPodcasts, setUserPodcasts] = useState([]);
   const username = localStorage.getItem("username");
   const userid = localStorage.getItem("userId");
+  const [userCreationDate, setUserCreationDate] = useState("");
 
   useEffect(() => {
     if (userid) {
+      axios
+        .get(`http://localhost:8081/users/${userid}`)
+        .then((response) => {
+          if (response.data.length > 0) {
+            const userDate = response.data[0].DateCreated;
+            const date = new Date(userDate);
+            const options = { year: "numeric", month: "long", day: "numeric" };
+            const userFriendlyDate = date.toLocaleDateString("en-US", options);
+            setUserCreationDate(userFriendlyDate);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user details:", error);
+        });
+
       axios
         .get(`http://localhost:8081/posts/getAllFromUser/${userid}`)
         .then((response) => {
@@ -46,7 +62,7 @@ const UserPage = () => {
                 <strong>Total Podcasts: {userPodcasts.length}</strong>
               </p>
               <p>
-                <strong>Joined on: {/*DATE GOES HERE*/}</strong>
+                <strong>Joined on: {userCreationDate}</strong>
               </p>
             </div>
             <div className="content-view-card">
