@@ -22,12 +22,18 @@
   color: #ecf0f1;
 }
 
-.CommonButton2 {
-  float: left !important;
-  display: block;
-}
-
 .ButtonAdjust {
   position: absolute;
   top: 2px;
+}
+
+.test {
+  width: 250px;
+  height: 45px;
+  margin-top: 2px;
+}
+
+.adjust {
+  position: absolute;
+  top: 3px;
 }
