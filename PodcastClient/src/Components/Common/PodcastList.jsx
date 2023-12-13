@@ -1,5 +1,5 @@
-//Props Title, Podcast List Data
-import { Component } from "react";
+// PodcastList.jsx
+import React, { Component } from "react";
 import PodcastData from "./PodcastData";
 
 export default class PodcastList extends Component {
@@ -11,9 +11,8 @@ export default class PodcastList extends Component {
   }
 
   handlePodcastClick = () => {
-    //Make it so when it is clicked, it opens a new tab or something and play the podcast selected
-
-    console.log("Podcast is clicked!"); //for testing
+    // Make it so when it is clicked, it opens a new tab or something and plays the podcast selected
+    console.log("Podcast is clicked!"); // for testing
   };
 
   render() {
@@ -27,6 +26,7 @@ export default class PodcastList extends Component {
               className="PodcastButton"
             >
               <PodcastData
+                key={index}
                 name={podcast.name}
                 artist={podcast.artist}
                 collection={podcast.collection}

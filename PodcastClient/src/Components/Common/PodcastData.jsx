@@ -11,10 +11,8 @@ export default class PodcastData extends Component {
       collection: props.collection ?? "",
     };
   }
-  //Holds a photo, artist and (if available) playlist data
+
   render() {
-    //We need to style how we want to display the generic window to see the work, but it should basically be this.
-    //Use initial values to test the look, worry about the back end later. I'm going to get started on that soon.
     return (
       <div style={{ border: 5, borderColor: "red", width: 200 }}>
         <div>
@@ -25,9 +23,17 @@ export default class PodcastData extends Component {
           />
         </div>
         <div>
-          <p>{`${this.state.name}`}</p>
-          <p>{`${this.state.artist}`}</p>
-          <p>{`${this.state.collection}`}</p>
+          <p>{`Podcast Title: ${this.state.name}`}</p>
+          <p>{`Description: ${this.state.artist}`}</p>
+          <p>
+            <a
+              href={this.state.collection}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Click to view podcast
+            </a>
+          </p>
         </div>
       </div>
     );
