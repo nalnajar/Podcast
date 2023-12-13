@@ -54,4 +54,5 @@
 .PodcastButton {
   border: none;
   background-color: transparent;
+  cursor: default !important;
 }

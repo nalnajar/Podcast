@@ -79,21 +79,23 @@ postController.get("/search/:title"),
  */
 postController.post("/postOne", async (req, res) => {
   const post = {
-    title: req.body.title,
-    text: req.body.text,
-    url: req.body.url,
-    userid: req.body.userid,
+    title: req.body.PostTitle,
+    text: req.body.PostText,
+    url: req.body.PostUrl,
+    userid: req.body.UserId,
   };
-  const query = `INSERT INTO posts (title, text, url, userid) VALUES (${post.title}, ${post.text}, ${post.userid}, ${post.url})`;
+  const query = `INSERT INTO posts (title, text, url, UserId) VALUES ('${post.title}', '${post.text}', '${post.url}', ${post.userid})`;
   await db.query(query, (err, result, fields) => {
     if (err) {
+      console.log(err);
       res.status(500).send(err);
     } else {
       if (err) {
+        console.log(err);
         res.status(500).send(err);
       } else {
         console.log(result);
-        res.status(200).send("Post Uploaded Successfully");
+        res.status(200).send(["Post Uploaded Successfully", result.insertId]);
       }
     }
   });

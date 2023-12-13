@@ -21,7 +21,6 @@ function App() {
           <Route path="/Contact-us" element={<ContactUs />} />
           <Route path="/Signup" element={<LoginSignup />} />
           <Route path="/Log-in" element={<LoginSignup />} />
-          <Route path="/HelpPage" element={<HelpPage />} />
           <Route path="/DevPage" element={<DevPage />}></Route>
           <Route path="/UserPage" element={<UserPage />}></Route>
 

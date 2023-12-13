@@ -57,7 +57,7 @@ userController.post("/login", async (req, res) => {
         const passwordMatch = hashedPassword === password; //await bcrypt.compare(password, hashedPassword);
 
         if (passwordMatch) {
-          res.status(200).send("Login Successful");
+          res.status(200).send(["Login Successful", result[0].UserId]);
         } else {
           res.status(401).send("Incorrect Password"); //This should be just be a single status fai lindicating wrong username/pass
         }
