@@ -1,20 +1,21 @@
 import { HeaderBar } from "../Common/Common";
-import PodcastData from "../Common/PodcastData";
+import PodcastList from "../Common/PodcastList";
+import React from "react";
 
 const Home = () => {
+  var data = [];
+  for (let i = 0; i < 50; i++) {
+    data.push({
+      name: "PodcastName",
+      artist: "PodcastArtist",
+      collection: "PodcastCollection",
+    });
+  }
+
   return (
     <div>
       <HeaderBar />
-      <PodcastData
-        name={"podcast name"}
-        artist={"podcast artist"}
-        collection={"this is part of a collection"}
-      />
-      <PodcastData
-        name={"another podcast name"}
-        artist={"another podcast artist"}
-        collection={""}
-      />
+      <PodcastList data={data} />
     </div>
   );
 };
