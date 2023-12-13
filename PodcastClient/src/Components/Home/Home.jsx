@@ -1,6 +1,7 @@
 import { HeaderBar } from "../Common/Common";
 import PodcastList from "../Common/PodcastList";
 import React, { useEffect, useState } from "react";
+import "./HomePage.css";
 
 const Home = () => {
   const [data, setData] = useState(() => {

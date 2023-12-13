@@ -1,5 +1,5 @@
 import { Component } from "react";
-
+import "./PodcastData.css";
 export default class PodcastData extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +14,7 @@ export default class PodcastData extends Component {
 
   render() {
     return (
-      <div
-        style={{ border: 5, borderColor: "red", width: 200, minHeight: 350 }}
-      >
+      <div style={{ border: 5, borderColor: "red", minHeight: 350 }}>
         <div>
           <img
             style={{ width: 200, cursor: "default" }}
@@ -24,7 +22,7 @@ export default class PodcastData extends Component {
             alt={`${this.state.artist} work cover.`}
           />
         </div>
-        <div>
+        <div className="LowerCardTextStyle">
           <p
             style={{ cursor: "default" }}
           >{`Podcast Title: ${this.state.name}`}</p>

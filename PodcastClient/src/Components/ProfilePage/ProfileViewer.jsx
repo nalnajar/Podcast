@@ -68,11 +68,13 @@ const UserPage = () => {
             <div className="content-view-card">
               <div className="content-view">
                 <h2>Content View</h2>
-                {userPodcasts.length > 0 ? (
-                  <PodcastList data={userPodcasts} />
-                ) : (
-                  <p>No podcasts available</p>
-                )}
+                <div>
+                  {userPodcasts.length > 0 ? (
+                    <PodcastList data={userPodcasts} />
+                  ) : (
+                    <p>No podcasts available</p>
+                  )}
+                </div>
               </div>
             </div>
           </Fragment>
