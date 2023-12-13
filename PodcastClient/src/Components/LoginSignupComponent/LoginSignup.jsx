@@ -359,7 +359,7 @@ class LoginSignup extends React.Component {
                 this.setDataEmbedded(data.embeded);
               }}
             />
-            <div id="myEmptyDiv" style={{ marginTop: 10, textAlign: "left" }}>
+            <div style={{ marginTop: 10, textAlign: "left" }}>
               <p>
                 Data URL:{" "}
                 <a
@@ -378,7 +378,9 @@ class LoginSignup extends React.Component {
               </p>
             </div>
           </div>
-          <button onClick={this.handleSave}>Save Podcast</button>
+          <button className="UploadSubmit" onClick={this.handleSave}>
+            Save Podcast
+          </button>
         </Modal>
 
         <Modal
