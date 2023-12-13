@@ -63,9 +63,10 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   justify-content: space-between;
   min-height: 350px;
+  max-width: 220px;
   width: 30%;
-  text-align: left;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .PodcastButton:hover,
