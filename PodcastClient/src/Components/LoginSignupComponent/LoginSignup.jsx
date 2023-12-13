@@ -135,7 +135,7 @@ class LoginSignup extends React.Component {
 
         if (response.status === 200) {
           localStorage.setItem("username", this.state.username);
-          console.log("username: ", response.data.username);
+          localStorage.setItem("userId", response.data[1]);
 
           window.location.reload(true);
           window.location.href = "/Home";
@@ -166,21 +166,38 @@ class LoginSignup extends React.Component {
     }
   }
 
-  async publishPodcast(post) {
-    //callback from picker is only URI
-    //
+  publishPodcast = async () => {
     var publish = {
-      uri: post,
-      title: this.state.podcastTitle,
-      artistid: this.state.username,
-      //description?:
+      UserId: localStorage.getItem("userId"),
+      PostTitle: this.state.podcastTitle,
+      PostText: this.state.podcastDescription,
+      PostUrl: this.state.dataURL,
     };
 
-    const response = await axios.post(/*uri to db with publish as body*/);
-  }
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/posts/postOne",
+        publish
+      );
+
+      console.log(response);
+      if (response.status === 200) {
+        this.setState({
+          podcastTitle: "",
+          podcastDescription: "",
+          dataURL: "",
+          dataEmbedded: "",
+          isUploadModalOpen: false,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   handleLogout() {
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
 
     this.setState({
       isAuthenticated: false,
@@ -259,29 +276,6 @@ class LoginSignup extends React.Component {
     console.log("Updated dataEmbedded: ", embedded);
   };
 
-  handleSave = () => {
-    const podcastDetails = {
-      podcastTitle: this.state.podcastTitle,
-      podcastDescription: this.state.podcastDescription,
-      dataURL: this.state.dataURL,
-      dataEmbedded:
-        this.state.dataEmbedded !== null
-          ? this.state.dataEmbedded
-          : "No embed data available",
-    };
-    console.log(podcastDetails);
-
-    // For Gavin: Do something with the podcastDetails object, such as saving it to state or sending it to an API or backend. So whereever we are sending this shiiiiiiit
-
-    this.setState({
-      podcastTitle: "",
-      podcastDescription: "",
-      dataURL: "",
-      dataEmbedded: null,
-      isUploadModalOpen: false,
-    });
-  };
-
   render() {
     return (
       <div className="CommonButtonAdjust">
@@ -354,7 +348,6 @@ class LoginSignup extends React.Component {
               clientId="497135623798-e2534hlo94h0p2vuq5ln3ogrtpiqi48q.apps.googleusercontent.com"
               developerKey="AIzaSyAzcwUpMma4jhndCfDvYa6TqigD1FNoV3E"
               callback={(data) => {
-                console.log("GooglePicker data:", data);
                 this.setDataURL(data.url);
                 this.setDataEmbedded(data.embeded);
               }}
@@ -378,7 +371,7 @@ class LoginSignup extends React.Component {
               </p>
             </div>
           </div>
-          <button className="UploadSubmit" onClick={this.handleSave}>
+          <button className="UploadSubmit" onClick={this.publishPodcast}>
             Save Podcast
           </button>
         </Modal>
