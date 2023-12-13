@@ -10,7 +10,9 @@ import "react-responsive-modal/styles.css";
 import "./LoginSignup.css";
 import GooglePicker from "../Common/GooglePicker";
 
+
 class LoginSignup extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -202,6 +204,8 @@ class LoginSignup extends React.Component {
     console.log();
   };
 
+  
+
   // handleFileChange = (event) => {
   //   this.setState({ selectedFile: event.target.files[0] });
   // };
@@ -259,6 +263,15 @@ class LoginSignup extends React.Component {
     console.log("Updated dataEmbedded: ", embedded);
   };
 
+  navigateToProfile = () => {
+    this.props.history.push('ProfilePage/ProfileViewer.jsx/UserPage');
+  };
+
+  handleViewProfile = () =>{
+    window.location.reload(true);
+    window.location.href = "/UserPage"
+  }
+
   handleSave = () => {
     const podcastDetails = {
       podcastTitle: this.state.podcastTitle,
@@ -280,7 +293,13 @@ class LoginSignup extends React.Component {
       dataEmbedded: null,
       isUploadModalOpen: false,
     });
+
+
+    
   };
+
+
+
 
   render() {
     return (
@@ -293,7 +312,7 @@ class LoginSignup extends React.Component {
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
                 <p onClick={this.handleUpload}>Upload</p>
-                <p>View Profile</p>
+                <p onClick={this.handleViewProfile}>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
               </div>

@@ -7,6 +7,8 @@ import DevPage from "./Components/DevPage/CodersComponent";
 import { Footer } from "./Components/Footer/Footer";
 import ContactUs from "./Components/ContactUs/ContactUs";
 import HelpPage from "./Components/HelpPage/HelpPage";
+import UserPage from "./Components/ProfilePage/ProfileViewer";
+
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/Log-in" element={<LoginSignup />} />
           <Route path="/HelpPage" element={<HelpPage />} />
           <Route path="/DevPage" element={<DevPage />}></Route>
+          <Route path="/UserPage" element={<UserPage />}></Route>
+
         </Routes>
         <div class="footerContainer">
           <Footer />
