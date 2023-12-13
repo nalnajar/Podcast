@@ -3,26 +3,23 @@ import PodcastList from "../Common/PodcastList";
 import React, { useEffect, useState } from "react";
 
 const Home = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(() => {
+    const storedData = localStorage.getItem("podcastData");
+    return storedData ? JSON.parse(storedData) : [];
+  });
 
   useEffect(() => {
     fetch("http://localhost:8081/posts/getAll")
-      .then((response) => {
-        console.log("Response status:", response.status);
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((postData) => {
-        console.log("Raw data from server:", postData);
-
         const formattedData = postData.map((post) => ({
           name: post.title,
           artist: post.text,
           collection: post.url,
         }));
 
-        console.log("Formatted data for the component:", formattedData);
-
         setData(formattedData);
+        localStorage.setItem("podcastData", JSON.stringify(formattedData));
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

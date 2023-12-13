@@ -17,21 +17,26 @@ export default class PodcastData extends Component {
       <div style={{ border: 5, borderColor: "red", width: 200 }}>
         <div>
           <img
-            style={{ width: 200 }}
+            style={{ width: 200, cursor: "default" }}
             src={`data:image/jpeg;base64,${this.state.imageB64}`}
             alt={`${this.state.artist} work cover.`}
           />
         </div>
         <div>
-          <p>{`Podcast Title: ${this.state.name}`}</p>
-          <p>{`Description: ${this.state.artist}`}</p>
+          <p
+            style={{ cursor: "default" }}
+          >{`Podcast Title: ${this.state.name}`}</p>
+          <p
+            style={{ cursor: "default" }}
+          >{`Description: ${this.state.artist}`}</p>
           <p>
             <a
               href={this.state.collection}
               target="_blank"
               rel="noopener noreferrer"
+              className="play-button-link"
             >
-              Click to view podcast
+              <span className="play-button-icon">▶</span> Click to play
             </a>
           </p>
         </div>
