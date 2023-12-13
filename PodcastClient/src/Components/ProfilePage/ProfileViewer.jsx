@@ -17,7 +17,13 @@ const UserPage = ({ userId }) => {
         <Fragment>
           {userData ? (
             <div>
-              <h2>{userData.username}'s Podcast Page</h2>
+                
+              {/* This is just dummy data to go off of */}
+             <img src={userData.profilePicture} alt="Profile" className='profile-picture' />
+              <h3>{userData.username}</h3>
+              <p><strong>Followers:</strong> {userData.totalFollowers}</p>
+              <p><strong>Total Podcasts:</strong> {userData.totalPodcasts}</p>
+
               {/* Display other user data as needed */}
 
             </div>
