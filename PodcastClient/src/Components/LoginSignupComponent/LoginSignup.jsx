@@ -202,6 +202,11 @@ class LoginSignup extends React.Component {
     console.log();
   };
 
+  handleViewProfile = () => {
+    window.location.reload(true);
+    window.location.href = "/ViewProfile";
+  };
+
   // handleFileChange = (event) => {
   //   this.setState({ selectedFile: event.target.files[0] });
   // };
@@ -293,7 +298,7 @@ class LoginSignup extends React.Component {
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
                 <p onClick={this.handleUpload}>Upload</p>
-                <p>View Profile</p>
+                <p onClick={this.handleViewProfile}>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
               </div>
