@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import GooglePicker from "./GooglePicker";
 import "./Common.css";
 import LoginSignup from "../LoginSignupComponent/LoginSignup";
-import SoundBarrier from "../Assets/SoundBarrierLogo.png";
+import SoundBarrier from "../Assets/SoundBarrierLogo2.png";
 
 function ButtonSB(props) {
   return (
@@ -36,8 +36,8 @@ function HeaderBar() {
   return (
     <div id="Header">
       <Link to="/Home">
-        <div className="ButtonAdjust">
-          <img src={SoundBarrier} alt="Home" width="100" height="50" />
+        <div className="ButtonAdjust adjust">
+          <img src={SoundBarrier} alt="Home" className="test" />
         </div>
       </Link>
       <p color="cyan">{selectedData.url}</p>
