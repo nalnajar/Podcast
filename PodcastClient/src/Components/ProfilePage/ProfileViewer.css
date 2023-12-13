@@ -1,0 +1,53 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.profile-card {
+  width: 250px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 1rem auto;
+  border: 2px solid #34495e;
+}
+
+.username-header {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.content-view-card {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-view {
+  text-align: center;
+}
+
+.content-view h2 {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-bottom: 1rem;
+  font-size: 32px;
+}

@@ -1,6 +1,7 @@
 // PodcastList.jsx
 import React, { Component } from "react";
 import PodcastData from "./PodcastData";
+import "./PodcastList.css";
 
 export default class PodcastList extends Component {
   constructor(props) {
@@ -17,8 +18,8 @@ export default class PodcastList extends Component {
 
   render() {
     return (
-      <div className="PodcastRow">
-        <ul className="PodcastRow">
+      <div>
+        <ul className="PodcastList2">
           {this.state.data_list.map((podcast, index) => (
             <button
               key={index}

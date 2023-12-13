@@ -219,9 +219,10 @@ class LoginSignup extends React.Component {
     console.log();
   };
 
-  // handleFileChange = (event) => {
-  //   this.setState({ selectedFile: event.target.files[0] });
-  // };
+  handleViewProfile = () => {
+    window.location.reload(true);
+    window.location.href = "/UserPage";
+  };
 
   componentDidMount() {
     const username = localStorage.getItem("username");
@@ -276,6 +277,29 @@ class LoginSignup extends React.Component {
     console.log("Updated dataEmbedded: ", embedded);
   };
 
+  handleSave = () => {
+    const podcastDetails = {
+      podcastTitle: this.state.podcastTitle,
+      podcastDescription: this.state.podcastDescription,
+      dataURL: this.state.dataURL,
+      dataEmbedded:
+        this.state.dataEmbedded !== null
+          ? this.state.dataEmbedded
+          : "No embed data available",
+    };
+    console.log(podcastDetails);
+
+    // For Gavin: Do something with the podcastDetails object, such as saving it to state or sending it to an API or backend. So whereever we are sending this shiiiiiiit
+
+    this.setState({
+      podcastTitle: "",
+      podcastDescription: "",
+      dataURL: "",
+      dataEmbedded: null,
+      isUploadModalOpen: false,
+    });
+  };
+
   render() {
     return (
       <div className="CommonButtonAdjust">
@@ -287,7 +311,7 @@ class LoginSignup extends React.Component {
             {this.state.isDropdownOpen && (
               <div className="dropdownContent">
                 <p onClick={this.handleUpload}>Upload</p>
-                <p>View Profile</p>
+                <p onClick={this.handleViewProfile}>View Profile</p>
                 <p>Manage Account</p>
                 <p onClick={this.handleLogout}>Logout</p>
               </div>
