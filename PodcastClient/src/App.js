@@ -21,8 +21,10 @@ function App() {
           <Route path="/Contact-us" element={<ContactUs />} />
           <Route path="/Signup" element={<LoginSignup />} />
           <Route path="/Log-in" element={<LoginSignup />} />
-          <Route path="/DevPage" element={<DevPage />}></Route>
-          <Route path="/UserPage" element={<UserPage />}></Route>
+          <Route path="/DevPage" element={<DevPage />}/>
+          <Route path="/UserPage" element={<UserPage />}/>
+          
+          <Route path="/HelpPage" element={<HelpPage />}/>
 
         </Routes>
         <div class="footerContainer">

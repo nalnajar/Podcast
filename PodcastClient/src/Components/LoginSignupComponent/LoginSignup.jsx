@@ -219,9 +219,10 @@ class LoginSignup extends React.Component {
     console.log();
   };
 
-  // handleFileChange = (event) => {
-  //   this.setState({ selectedFile: event.target.files[0] });
-  // };
+  handleViewProfile = () => {
+    window.location.reload(true);
+    window.location.href = "/UserPage";
+  };
 
   componentDidMount() {
     const username = localStorage.getItem("username");

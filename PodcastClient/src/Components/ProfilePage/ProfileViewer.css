@@ -1,36 +1,53 @@
 .user-page {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  margin: 1cm 0;
+  margin-top: 2rem;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .profile-card {
-  width: 20%;
-  background-color: #fff; 
-  border-radius: 15px;
-  padding: 20px;
+  width: 250px; /* Fixed width for profile card */
+  background-color: #f2f2f2; /* Light grey background */
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  text-align: center; /* Center text for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-
 
 .profile-picture {
   width: 100px;
-  border-radius: 70px;
-  margin-top: 50px;
+  height: 100px; /* Make the picture a perfect circle */
+  border-radius: 50%; /* Circular profile pictures */
+  margin: 1rem auto; /* Center the image in the card */
+  border: 2px solid #34495e; /* SoundCloud-like orange border */
 }
 
 .username-header {
-  margin-bottom: 50px;
+  font-size: 1.5rem;
+  color: #34495e; /* SoundCloud-like orange for the username */
+  margin-bottom: 0.5rem;
 }
 
-
 .content-view-card {
-  flex: 1;
-  background-color: #fff; 
-  border-radius: 15px;
-  padding: 2px;
-  margin-top: -5cm; 
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 100%;
+  max-width: 800px; /* Maximum width for content view */
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Match the shadow of the profile card */
+}
 
+.content-view {
+  text-align: center; /* Align text to the left for content list */
+}
+
+.content-view h2 {
+  font-size: 1.5rem;
+  color: #34495e; /* SoundCloud-like orange for headers */
+  margin-bottom: 1rem;
+  font-size: 32px;
 }

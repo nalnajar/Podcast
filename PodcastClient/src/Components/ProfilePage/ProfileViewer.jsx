@@ -3,52 +3,37 @@ import { HeaderBar } from "../Common/Common";
 import axios from "axios";
 import ProfilePicture from "../Assets/profilepic_placeholder.jpg";
 import "./ProfileViewer.css";
+import PodcastList from "../Common/PodcastList";
 
-const ContentView = ({ userPodcasts }) => {
-  return (
-    <div className="content-view">
-      <h2>Content View</h2>
-      {userPodcasts ? (
-        userPodcasts.map((podcast) => (
-          <div key={podcast.id}>
-            <h3>{podcast.title}</h3>
-            {/* Other info needed */}
-          </div>
-        ))
-      ) : (
-        <p>No podcasts available</p>
-      )}
-    </div>
-  );
-};
-
-const UserPage = ({ userId }) => {
+const UserPage = () => {
   const [userPodcasts, setUserPodcasts] = useState([]);
-  const [totalPodcasts, setTotalPodcasts] = useState(0); // Initialize totalPodcasts state
   const username = localStorage.getItem("username");
+  const userid = localStorage.getItem("userId");
 
   useEffect(() => {
-    const fetchUserPodcasts = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8081/user/${username}/podcasts`);
-        setUserPodcasts(response.data); // Assuming the response is an array of user podcasts
-        setTotalPodcasts(response.data.length); // Set totalPodcasts based on the fetched data length
-      } catch (error) {
-        console.error("Error fetching user podcasts:", error);
-      }
-    };
+    if (userid) {
+      axios
+        .get(`http://localhost:8081/posts/getAllFromUser/${userid}`)
+        .then((response) => {
+          const formattedData = response.data.map((post) => ({
+            name: post.title,
+            artist: post.text,
+            collection: post.url,
+          }));
 
-    if (username) {
-      fetchUserPodcasts();
+          setUserPodcasts(formattedData);
+        })
+        .catch((error) => {
+          console.error("Error fetching user podcasts:", error);
+        });
     }
-  }, [username]);
+  }, [userid]);
 
   return (
     <div>
       <HeaderBar />
-
       <div className="user-page">
-        {username !== "" ? (
+        {username ? (
           <Fragment>
             <div className="profile-card">
               <img
@@ -58,12 +43,21 @@ const UserPage = ({ userId }) => {
               />
               <h2 className="username-header">{username}</h2>
               <p>
-                <strong>Total Podcasts: {totalPodcasts}</strong>
+                <strong>Total Podcasts: {userPodcasts.length}</strong>
+              </p>
+              <p>
+                <strong>Joined on: {/*DATE GOES HERE*/}</strong>
               </p>
             </div>
             <div className="content-view-card">
-              {/* Pass userPodcasts and totalPodcasts as props to ContentView */}
-              <ContentView userPodcasts={userPodcasts} />
+              <div className="content-view">
+                <h2>Content View</h2>
+                {userPodcasts.length > 0 ? (
+                  <PodcastList data={userPodcasts} />
+                ) : (
+                  <p>No podcasts available</p>
+                )}
+              </div>
             </div>
           </Fragment>
         ) : (

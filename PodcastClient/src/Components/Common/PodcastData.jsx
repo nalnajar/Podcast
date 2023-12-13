@@ -14,7 +14,9 @@ export default class PodcastData extends Component {
 
   render() {
     return (
-      <div style={{ border: 5, borderColor: "red", width: 200 }}>
+      <div
+        style={{ border: 5, borderColor: "red", width: 200, minHeight: 350 }}
+      >
         <div>
           <img
             style={{ width: 200, cursor: "default" }}

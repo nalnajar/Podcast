@@ -42,7 +42,7 @@ postController.get("/getAll", async (req, res) => {
 /*
  * Get all post from userid
  */
-postController.get("/getAllFromUser/:userid"),
+postController.get("/getAllFromUser/:userid",
   async (req, res) => {
     console.log("posts/getAllFromUser/:id HIT");
     await db.query(
@@ -54,12 +54,12 @@ postController.get("/getAllFromUser/:userid"),
         res.status(200).send(result);
       }
     );
-  };
+  });
 
 /*
  * Get posts with search
  */
-postController.get("/search/:title"),
+postController.get("/search/:title",
   async (req, res) => {
     console.log("posts/search/:title HIT");
     await db.query(
@@ -71,7 +71,7 @@ postController.get("/search/:title"),
         res.status(200).send(result);
       }
     );
-  };
+  });
 
 // Post Calls
 /*
