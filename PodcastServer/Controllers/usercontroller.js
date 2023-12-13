@@ -3,13 +3,26 @@ import { express, db } from "./controllerimports.js";
 
 const userController = express.Router(); //router for the controller
 /*
+ * Gets all registered users from the database
+ */
+userController.get("/users", async (req, res) => {
+  console.log("Selecting all from the users table:");
+  await db.query("SELECT * FROM users", (err, result, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).send(result);
+  });
+});
+
+/*
  * Gets a single user using an `id` value
  */
 userController.get("/:id", async (req, res) => {
   console.log("Selecting a user from the users table:");
   await db.query(
-    `SELECT * FROM users WHERE id = ?`,
-    [req.body.id],
+    `SELECT * FROM users WHERE UserId = ?`,
+    [req.params.id],
     (err, result, fields) => {
       if (err) {
         res.status(500).send(err);
@@ -18,6 +31,7 @@ userController.get("/:id", async (req, res) => {
     }
   );
 });
+
 /*
  * Posts a new user to the database
  */
@@ -83,19 +97,6 @@ userController.delete("/deleteUser/:id", async (req, res) => {
       }
     }
   );
-});
-
-/*
- * Gets all registered users from the database
- */
-userController.get("/users", async (req, res) => {
-  console.log("Selecting all from the users table:");
-  await db.query("SELECT * FROM users", (err, result, fields) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.status(200).send(result);
-  });
 });
 
 export default userController;
