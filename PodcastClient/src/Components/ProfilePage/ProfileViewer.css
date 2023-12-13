@@ -12,10 +12,11 @@
   padding: 20px;
 }
 
+
 .profile-picture {
   width: 100px;
   border-radius: 70px;
-  margin-top: 50px; 
+  margin-top: 50px;
 }
 
 .username-header {
